@@ -213,14 +213,14 @@ export default function Historial() {
 
                   <div>
                     <p style={{ fontSize: '12px', color: 'var(--gray)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <IconUniversity /> Universidad preferida
+                      <IconUniversity /> Universidad de preferencia del mentor
                     </p>
                     <p>{reserva.universidad_preferida || 'Sin preferencia'}</p>
                   </div>
 
                   <div>
                     <p style={{ fontSize: '12px', color: 'var(--gray)', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <IconBook /> Semestre preferido
+                      <IconBook /> Semestre de preferencia del mentor
                     </p>
                     <p>{reserva.semestre_preferido || 'Sin preferencia'}</p>
                   </div>
