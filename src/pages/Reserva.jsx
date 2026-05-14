@@ -915,7 +915,7 @@ export default function Reserva() {
                       </label>
                       <div style={{ 
                         display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', 
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
                         gap: '12px',
                         background: 'white',
                         padding: '15px',
@@ -927,15 +927,15 @@ export default function Reserva() {
                               type="checkbox"
                               checked={temasInteres.includes(tema)}
                               onChange={() => handleTemaChange(tema)}
-                              style={{ width: '16px', height: '16px', cursor: 'pointer' }}
+                              style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0 }}
                             />
-                            <span style={{ fontSize: '14px' }}>{tema}</span>
+                            <span style={{ fontSize: '14px', wordBreak: 'break-word' }}>{tema}</span>
                           </label>
                         ))}
                       </div>
                     </div>
                   )}
-
+                  
                   {/* Intereses para CARRERA */}
                   {tipoServicio === 'carrera' && (
                     <div style={{ marginBottom: '20px' }}>
@@ -944,7 +944,7 @@ export default function Reserva() {
                       </label>
                       <div style={{ 
                         display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', 
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
                         gap: '12px',
                         background: 'white',
                         padding: '15px',
@@ -956,15 +956,14 @@ export default function Reserva() {
                               type="checkbox"
                               checked={interesesMentoria.includes(interes)}
                               onChange={() => handleInteresCarreraChange(interes)}
-                              style={{ width: '16px', height: '16px', cursor: 'pointer' }}
+                              style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0 }}
                             />
-                            <span style={{ fontSize: '14px' }}>{interes}</span>
+                            <span style={{ fontSize: '14px', wordBreak: 'break-word' }}>{interes}</span>
                           </label>
                         ))}
                       </div>
                     </div>
                   )}
-
                   <div className="form-group">
                     <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <IconUniversity /> Universidad/Institución donde pertenece el mentor (opcional)
