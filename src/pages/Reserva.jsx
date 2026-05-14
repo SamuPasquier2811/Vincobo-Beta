@@ -758,30 +758,12 @@ export default function Reserva() {
                 </h3>
 
                 {/* Selección de tipo de servicio */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '25px' }}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setTipoServicio('consulta')
-                      setApuntesIncluidos(false)
-                    }}
-                    style={{
-                      padding: '20px',
-                      border: tipoServicio === 'consulta' ? '2px solid var(--primary)' : '1px solid #E2E8F0',
-                      borderRadius: '12px',
-                      background: tipoServicio === 'consulta' ? 'var(--primary-soft)' : 'white',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
-                      <IconConsult />
-                      <span style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--primary)' }}>CONSULTA</span>
-                    </div>
-                    <p style={{ fontSize: '14px', color: 'var(--gray)' }}>Dudas puntuales sobre ingreso o vida universitaria</p>
-                    <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px' }}>Reunión Virtual de 15-25 minutos • 30 Bs</p>
-                  </button>
-
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                  gap: '15px', 
+                  marginBottom: '25px' 
+                }}>
                   <button
                     type="button"
                     onClick={() => {
@@ -795,21 +777,44 @@ export default function Reserva() {
                       background: tipoServicio === 'carrera' ? 'var(--primary-soft)' : 'white',
                       cursor: 'pointer',
                       position: 'relative',
-                      transition: 'all 0.2s ease'
+                      transition: 'all 0.2s ease',
+                      width: '100%'
                     }}
                   >
                     <div style={{ position: 'absolute', top: '-10px', right: '10px', background: 'var(--primary)', color: 'white', padding: '4px 8px', borderRadius: '20px', fontSize: '10px', fontWeight: 'bold' }}>
                       Más Popular
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px', flexWrap: 'wrap' }}>
                       <IconCareer />
                       <span style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--primary)' }}>CARRERA</span>
                     </div>
                     <p style={{ fontSize: '14px', color: 'var(--gray)' }}>Explicación completa: Introducción, malla curricular, proyectos reales y experiencias</p>
                     <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px' }}>Reunión Virtual de 45-60 minutos • 60 Bs</p>
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setTipoServicio('consulta')
+                      setApuntesIncluidos(false)
+                    }}
+                    style={{
+                      padding: '20px',
+                      border: tipoServicio === 'consulta' ? '2px solid var(--primary)' : '1px solid #E2E8F0',
+                      borderRadius: '12px',
+                      background: tipoServicio === 'consulta' ? 'var(--primary-soft)' : 'white',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      width: '100%'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '12px', flexWrap: 'wrap' }}>
+                      <IconConsult />
+                      <span style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--primary)' }}>CONSULTA</span>
+                    </div>
+                    <p style={{ fontSize: '14px', color: 'var(--gray)' }}>Dudas puntuales sobre ingreso o vida universitaria</p>
+                    <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px' }}>Reunión Virtual de 15-25 minutos • 30 Bs</p>
+                  </button>
                 </div>
-
                 {/* Opción de apuntes (solo para CARRERA, al final del formulario) */}
                 {tipoServicio === 'carrera' && apuntesIncluidos && (
                   <div style={{ marginBottom: '20px' }}>
