@@ -668,25 +668,56 @@ export default function Reserva() {
           {/* Datos del perfil */}
           <div style={{ 
             background: 'linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%)',
-            padding: '20px', borderRadius: '8px', marginBottom: '30px',
-            fontSize: '14px', borderLeft: '4px solid var(--primary)'
+            padding: '20px', 
+            borderRadius: '8px', 
+            marginBottom: '30px',
+            fontSize: '14px', 
+            borderLeft: '4px solid var(--primary)',
+            overflowX: 'auto'
           }}>
             <p style={{ marginBottom: '10px', fontWeight: 'bold', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               Datos de tu cuenta:
             </p>
-            <p style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <IconUser /> <strong>Nombre:</strong> {perfil.nombre_completo}
-            </p>
-            <p style={{ display: 'flex', marginTop: '10px', alignItems: 'center', gap: '8px' }}>
-              <IconMail /> <strong>Email:</strong> {perfil.email}
-            </p>
-            {perfil.tipo_usuario === 'tutor' && (
-              <p style={{ color: 'var(--primary)', marginTop: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <IconChild /> <strong>Padre/Madre/Tutor de:</strong> {perfil.nombre_menor}
-              </p>
-            )}
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: '10px'
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'flex-start', 
+                gap: '8px',
+                flexWrap: 'wrap'
+              }}>
+                <IconUser style={{ flexShrink: 0, marginTop: '2px' }} />
+                <strong style={{ flexShrink: 0 }}>Nombre:</strong>
+                <span style={{ wordBreak: 'break-word', flex: 1 }}>{perfil.nombre_completo}</span>
+              </div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'flex-start', 
+                gap: '8px',
+                flexWrap: 'wrap'
+              }}>
+                <IconMail style={{ flexShrink: 0, marginTop: '2px' }} />
+                <strong style={{ flexShrink: 0 }}>Email:</strong>
+                <span style={{ wordBreak: 'break-word', flex: 1 }}>{perfil.email}</span>
+              </div>
+              {perfil.tipo_usuario === 'tutor' && (
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'flex-start', 
+                  gap: '8px',
+                  flexWrap: 'wrap',
+                  color: 'var(--primary)'
+                }}>
+                  <IconChild style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <strong style={{ flexShrink: 0 }}>Padre/Madre/Tutor de:</strong>
+                  <span style={{ wordBreak: 'break-word', flex: 1 }}>{perfil.nombre_menor}</span>
+                </div>
+              )}
+            </div>
           </div>
-
           <form onSubmit={handleSubmit} noValidate>
             {/* PASO 1: Datos del reservante */}
             {pasoActual === 1 && (
@@ -914,22 +945,22 @@ export default function Reserva() {
                         <IconConsult /> Temas de interés
                       </label>
                       <div style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+                        display: 'flex', 
+                        flexDirection: 'column',
                         gap: '12px',
                         background: 'white',
                         padding: '15px',
                         borderRadius: '10px'
                       }}>
                         {temasConsulta.map(tema => (
-                          <label key={tema} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                          <label key={tema} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer' }}>
                             <input
                               type="checkbox"
                               checked={temasInteres.includes(tema)}
                               onChange={() => handleTemaChange(tema)}
-                              style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0 }}
+                              style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0, marginTop: '2px' }}
                             />
-                            <span style={{ fontSize: '14px', wordBreak: 'break-word' }}>{tema}</span>
+                            <span style={{ fontSize: '14px', wordBreak: 'break-word', lineHeight: '1.4' }}>{tema}</span>
                           </label>
                         ))}
                       </div>
@@ -940,25 +971,25 @@ export default function Reserva() {
                   {tipoServicio === 'carrera' && (
                     <div style={{ marginBottom: '20px' }}>
                       <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-                        <IconBriefcase /> ¿Qué temas te interesa profundizar dentro de la explicación que te dará el mentor?
+                        <IconBriefcase /> ¿Qué temas te interesa profundizar?
                       </label>
                       <div style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                        display: 'flex', 
+                        flexDirection: 'column',
                         gap: '12px',
                         background: 'white',
                         padding: '15px',
                         borderRadius: '10px'
                       }}>
                         {interesesCarrera.map(interes => (
-                          <label key={interes} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                          <label key={interes} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer' }}>
                             <input
                               type="checkbox"
                               checked={interesesMentoria.includes(interes)}
                               onChange={() => handleInteresCarreraChange(interes)}
-                              style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0 }}
+                              style={{ width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0, marginTop: '2px' }}
                             />
-                            <span style={{ fontSize: '14px', wordBreak: 'break-word' }}>{interes}</span>
+                            <span style={{ fontSize: '14px', wordBreak: 'break-word', lineHeight: '1.4' }}>{interes}</span>
                           </label>
                         ))}
                       </div>
@@ -1137,18 +1168,44 @@ export default function Reserva() {
               </div>
             )}
 
-            <div style={{ display: 'flex', gap: '10px', marginTop: '30px' }}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              gap: '12px', 
+              marginTop: '30px' 
+            }}>
               {pasoActual > 1 && (
-                <button type="button" onClick={handleAnterior} className="btn btn-secondary" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <button type="button" onClick={handleAnterior} className="btn btn-secondary" style={{ 
+                  width: '100%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '8px',
+                  padding: '12px 20px'
+                }}>
                   <IconArrowLeft /> Anterior
                 </button>
               )}
               {pasoActual < 3 ? (
-                <button type="button" onClick={handleSiguiente} className="btn btn-primary" style={{ flex: pasoActual === 1 ? 1 : 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <button type="button" onClick={handleSiguiente} className="btn btn-primary" style={{ 
+                  width: '100%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '8px',
+                  padding: '12px 20px'
+                }}>
                   Siguiente <IconArrowRight />
                 </button>
               ) : (
-                <button type="submit" className="btn btn-primary" style={{ flex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }} disabled={enviando}>
+                <button type="submit" className="btn btn-primary" style={{ 
+                  width: '100%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '8px',
+                  padding: '12px 20px'
+                }} disabled={enviando}>
                   {enviando ? 'Enviando...' : `Confirmar y Pagar ${calcularPrecio()} Bs`}
                   {!enviando && <IconCheck />}
                 </button>
@@ -1162,6 +1219,48 @@ export default function Reserva() {
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 640px) {
+          .card {
+            padding: 16px !important;
+          }
+          
+          .form-input, .btn, select, textarea {
+            font-size: 14px !important;
+          }
+          
+          h2 {
+            font-size: 20px !important;
+          }
+          
+          h3 {
+            font-size: 18px !important;
+          }
+          
+          /* Para el recuadro de datos */
+          .card > div:first-of-type {
+            overflow-x: auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .card {
+            padding: 12px !important;
+          }
+          
+          .form-label {
+            font-size: 13px !important;
+          }
+          
+          div[style*="width: 30px"] {
+            width: 24px !important;
+            height: 24px !important;
+            font-size: 12px !important;
+          }
+          
+          span[style*="font-size: 12px"] {
+            font-size: 10px !important;
+          }
+        }
       `}</style>
     </div>
   )
