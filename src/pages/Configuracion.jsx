@@ -452,7 +452,7 @@ export default function Configuracion() {
                     <div style={{ display: 'flex', gap: '10px', marginTop: '30px', justifyContent: 'flex-end' }}>
                         {perfil.rol === 'usuario' ? (
                             <p style={{ color: 'var(--gray)', fontSize: '14px', textAlign: 'center', width: '100%' }}>
-                                Si necesita actualizar su información, contacte al soporte técnico.
+                                Si necesita actualizar su información, contacte al soporte técnico: vincobosaluda@gmail.com
                             </p>
                         ) : (
                             !editando ? (
