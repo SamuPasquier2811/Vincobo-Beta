@@ -104,6 +104,16 @@ export default function Register() {
     }, 5000)
   }
 
+  // Función para formatear nombre (primera letra mayúscula, resto minúscula)
+  const formatearNombre = (nombre) => {
+    if (!nombre) return ''
+    return nombre
+      .toLowerCase()
+      .split(' ')
+      .map(palabra => palabra.charAt(0).toUpperCase() + palabra.slice(1))
+      .join(' ')
+  }
+
   // Función para traducir errores de Supabase
   const traducirErrorSupabase = (error) => {
     const errores = {
@@ -177,10 +187,10 @@ export default function Register() {
             .insert([{
               id: authData.user.id,
               email: formData.email,
-              nombre_completo: formData.nombre_completo,
+              nombre_completo: formatearNombre(formData.nombre_completo),
               celular: formData.celular,
               tipo_usuario: tipo,
-              nombre_menor: tipo === 'tutor' ? formData.nombre_menor : null,
+              nombre_menor: tipo === 'tutor' ? formatearNombre(formData.nombre_menor) : null,
               rol: 'usuario',
               edad: edad,
               fecha_nacimiento_mayor: formData.fecha_nacimiento,
