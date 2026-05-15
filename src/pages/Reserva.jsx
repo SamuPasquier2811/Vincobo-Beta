@@ -950,7 +950,7 @@ export default function Reserva() {
             {pasoActual === 2 && (
               <div style={{ animation: 'fadeIn 0.5s ease' }}>
                 <h3 style={{ marginBottom: '20px', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  Detalles de la mentoría
+                  Escoge el tipo de la mentoría
                 </h3>
 
                 {/* Selección de tipo de servicio */}
