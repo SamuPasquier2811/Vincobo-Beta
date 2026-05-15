@@ -699,7 +699,7 @@ export default function Reserva() {
 
     let comentariosFinales = comentarios
     if (tipoUsuario === 'tutor') {
-      comentariosFinales = `[CONSENTIMIENTO TUTOR: El tutor ${perfil.nombre_completo} autoriza la mentoría para ${nombreMenor}] - ${comentarios}`
+      comentariosFinales = `[CONSENTIMIENTO: El/la padre/madre/tutor(a) ${perfil.nombre_completo} autoriza la mentoría para ${nombreMenor}] - ${comentarios}`
     }
 
     const precio = calcularPrecio()
