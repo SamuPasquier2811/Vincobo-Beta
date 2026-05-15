@@ -1322,7 +1322,7 @@ export default function Reserva() {
                     <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '15px' }}>
                       <input type="checkbox" id="consentimiento" checked={consentimientoMenor} onChange={(e) => setConsentimientoMenor(e.target.checked)} required />
                       <label htmlFor="consentimiento">
-                        <strong style={{ color: 'var(--primary)' }}>Consentimiento:</strong> Declaro que soy tutor de {nombreMenor} y autorizo su participación
+                        <strong style={{ color: 'var(--primary)' }}>Consentimiento:</strong> Declaro que soy padre/madre/tutor(a) de {nombreMenor} y autorizo su participación
                       </label>
                     </div>
                   )}
