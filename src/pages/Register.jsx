@@ -385,7 +385,7 @@ export default function Register() {
             {tipo === 'tutor' && (
               <>
                 <div className="form-group">
-                  <label className="form-label">Nombre del menor (tu hijo/a, quién recibirá la mentoría)</label>
+                  <label className="form-label">Nombre Completo del menor (tu hijo/a, quién recibirá la mentoría)</label>
                   <input
                     type="text"
                     name="nombre_menor"
