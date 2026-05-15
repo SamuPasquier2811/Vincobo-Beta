@@ -26,59 +26,124 @@ const IconBriefcase = () => <svg width="20" height="20" viewBox="0 0 24 24" fill
 // Modal para Términos y Condiciones
 const ModalTerminos = ({ isOpen, onClose }) => {
   if (!isOpen) return null
+  
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000, animation: 'modalFadeIn 0.2s ease' }}>
-      <div style={{ backgroundColor: 'white', borderRadius: '16px', maxWidth: '700px', width: '90%', maxHeight: '80vh', overflowY: 'auto', boxShadow: '0 20px 35px rgba(0,0,0,0.2)', margin: '20px' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, background: 'white' }}>
-          <h3 style={{ color: 'var(--primary)', margin: 0 }}>Términos y Condiciones de Uso</h3>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: '28px', cursor: 'pointer', color: 'var(--gray)' }}>×</button>
+    <div style={{ 
+      position: 'fixed', 
+      top: 0, 
+      left: 0, 
+      right: 0, 
+      bottom: 0, 
+      backgroundColor: 'rgba(0,0,0,0.5)', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      zIndex: 10000, 
+      animation: 'modalFadeIn 0.2s ease',
+      padding: '16px',
+      boxSizing: 'border-box'
+    }}>
+      <div style={{ 
+        backgroundColor: 'white', 
+        borderRadius: '16px', 
+        maxWidth: '700px', 
+        width: '100%', 
+        maxHeight: '85vh', 
+        overflowY: 'auto', 
+        boxShadow: '0 20px 35px rgba(0,0,0,0.2)',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative'
+      }}>
+        <div style={{ 
+          padding: '16px 20px', 
+          borderBottom: '1px solid #E2E8F0', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          position: 'sticky', 
+          top: 0, 
+          background: 'white', 
+          zIndex: 1,
+          flexShrink: 0
+        }}>
+          <h3 style={{ color: 'var(--primary)', margin: 0, fontSize: 'clamp(16px, 5vw, 20px)' }}>Términos y Condiciones de Uso</h3>
+          <button 
+            onClick={onClose} 
+            style={{ 
+              background: 'none', 
+              border: 'none', 
+              fontSize: '28px', 
+              cursor: 'pointer', 
+              color: 'var(--gray)',
+              width: '36px',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '50%',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#F1F5F9'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+          >
+            ×
+          </button>
         </div>
-        <div style={{ padding: '24px', fontSize: '14px', lineHeight: '1.6' }}>
-          <p style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px' }}>TÉRMINOS Y CONDICIONES DE USO – VINCOBO</p>
+        <div style={{ 
+          padding: '20px', 
+          fontSize: 'clamp(12px, 4vw, 14px)', 
+          lineHeight: '1.6',
+          overflowY: 'auto',
+          flex: 1
+        }}>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: 'clamp(13px, 4vw, 16px)' }}>
+            TÉRMINOS Y CONDICIONES DE USO – VINCOBO
+          </p>
 
-          <h4>1. IDENTIFICACIÓN DEL SERVICIO</h4>
-          <p>VINCOBO es una plataforma digital de mentoría académica que actúa como intermediaria tecnológica, conectando usuarios (estudiantes o personas en transición de carrera) con mentores (universitarios, egresados o profesionales), con el objetivo de brindar orientación educativa y profesional.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>1. IDENTIFICACIÓN DEL SERVICIO</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO es una plataforma digital de mentoría académica que actúa como intermediaria tecnológica, conectando usuarios (estudiantes o personas en transición de carrera) con mentores (universitarios, egresados o profesionales), con el objetivo de brindar orientación educativa y profesional.</p>
 
-          <h4>2. ACEPTACIÓN DE LOS TÉRMINOS</h4>
-          <p>El acceso, registro y uso de la plataforma implica la aceptación expresa, libre e informada de los presentes Términos y Condiciones.</p>
-          <p>En el caso de usuarios menores de edad, la aceptación deberá ser realizada obligatoriamente por el padre, madre o tutor legal, quien asumirá la calidad de usuario responsable y contratante.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>2. ACEPTACIÓN DE LOS TÉRMINOS</h4>
+          <p style={{ marginBottom: '12px' }}>El acceso, registro y uso de la plataforma implica la aceptación expresa, libre e informada de los presentes Términos y Condiciones.</p>
+          <p style={{ marginBottom: '12px' }}>En el caso de usuarios menores de edad, la aceptación deberá ser realizada obligatoriamente por el padre, madre o tutor legal, quien asumirá la calidad de usuario responsable y contratante.</p>
 
-          <h4>3. DECLARACIÓN DE VERACIDAD Y RESPONSABILIDAD</h4>
-          <p>El usuario declara que toda la información proporcionada es veraz, completa y actualizada.</p>
-          <p>VINCOBO no será responsable por la falsedad, inexactitud o uso no autorizado de datos personales proporcionados por los usuarios.</p>
-          <p>El usuario asume plena responsabilidad por cualquier daño o perjuicio derivado de la provisión de información falsa o del uso indebido de la identidad de terceros.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>3. DECLARACIÓN DE VERACIDAD Y RESPONSABILIDAD</h4>
+          <p style={{ marginBottom: '12px' }}>El usuario declara que toda la información proporcionada es veraz, completa y actualizada.</p>
+          <p style={{ marginBottom: '12px' }}>VINCOBO no será responsable por la falsedad, inexactitud o uso no autorizado de datos personales proporcionados por los usuarios.</p>
+          <p style={{ marginBottom: '12px' }}>El usuario asume plena responsabilidad por cualquier daño o perjuicio derivado de la provisión de información falsa o del uso indebido de la identidad de terceros.</p>
 
-          <h4>4. CAPACIDAD LEGAL Y USO POR MENORES DE EDAD</h4>
-          <p>El uso de la plataforma por menores de edad está permitido únicamente bajo supervisión y consentimiento expreso del padre, madre o tutor legal. A tal efecto, el adulto responsable deberá:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>4. CAPACIDAD LEGAL Y USO POR MENORES DE EDAD</h4>
+          <p style={{ marginBottom: '12px' }}>El uso de la plataforma por menores de edad está permitido únicamente bajo supervisión y consentimiento expreso del padre, madre o tutor legal. A tal efecto, el adulto responsable deberá:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Crear la cuenta del menor.</li>
             <li>Autorizar el uso de la plataforma.</li>
             <li>Supervisar la participación del menor en las sesiones.</li>
             <li>El usuario garantiza contar con las autorizaciones necesarias para el uso de la plataforma por menores de edad, incluyendo su participación en sesiones que puedan ser grabadas.</li>
           </ul>
-          <p>Se deja claramente establecido que VINCOBO no será responsable por el uso indebido de la plataforma cuando estas obligaciones no sean cumplidas.</p>
+          <p style={{ marginBottom: '12px' }}>Se deja claramente establecido que VINCOBO no será responsable por el uso indebido de la plataforma cuando estas obligaciones no sean cumplidas.</p>
 
-          <h4>5. SUPLANTACIÓN DE IDENTIDAD</h4>
-          <p>VINCOBO no será responsable por registros realizados mediante suplantación de identidad, uso indebido de datos de terceros o cualquier forma de falsedad en la información proporcionada.</p>
-          <p>En caso de detectarse estas conductas, la plataforma podrá suspender o cancelar la cuenta, sin perjuicio de iniciar las acciones legales correspondientes.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>5. SUPLANTACIÓN DE IDENTIDAD</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO no será responsable por registros realizados mediante suplantación de identidad, uso indebido de datos de terceros o cualquier forma de falsedad en la información proporcionada.</p>
+          <p style={{ marginBottom: '12px' }}>En caso de detectarse estas conductas, la plataforma podrá suspender o cancelar la cuenta, sin perjuicio de iniciar las acciones legales correspondientes.</p>
 
-          <h4>6. NATURALEZA DEL SERVICIO</h4>
-          <p>VINCOBO ofrece servicios de mentoría en las siguientes modalidades:</p>
-          <ol style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>6. NATURALEZA DEL SERVICIO</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO ofrece servicios de mentoría en las siguientes modalidades:</p>
+          <ol style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Consulta</li>
             <li>Carrera</li>
             <li>Carrera+</li>
           </ol>
-          <p>Las sesiones impartidas por VINCOBO:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <p style={{ marginBottom: '12px' }}>Las sesiones impartidas por VINCOBO:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Podrán ser supervisadas en tiempo real o de manera posterior.</li>
             <li>Serán grabadas por motivos de seguridad, control de calidad y resolución de posibles controversias.</li>
             <li>El usuario reconoce y acepta expresamente la grabación de las sesiones, declarando contar con las autorizaciones necesarias en caso de participación de menores de edad.</li>
           </ul>
 
-          <h4>7. OBLIGACIONES DE LOS USUARIOS</h4>
-          <p>El usuario se compromete a:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>7. OBLIGACIONES DE LOS USUARIOS</h4>
+          <p style={{ marginBottom: '12px' }}>El usuario se compromete a:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Utilizar la plataforma de manera lícita y conforme a su finalidad.</li>
             <li>No grabar, reproducir, distribuir o comercializar el contenido recibido.</li>
             <li>No solicitar ni compartir datos personales con mentores (WhatsApp, redes sociales, etc.).</li>
@@ -86,74 +151,156 @@ const ModalTerminos = ({ isOpen, onClose }) => {
             <li>Proporcionar información veraz y no suplantar identidad de terceros.</li>
           </ul>
 
-          <h4>8. OBLIGACIONES DE LOS MENTORES</h4>
-          <p>Los mentores deberán:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>8. OBLIGACIONES DE LOS MENTORES</h4>
+          <p style={{ marginBottom: '12px' }}>Los mentores deberán:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Brindar información veraz y adecuada.</li>
             <li>Mantener estándares profesionales (puntualidad, presentación, entorno adecuado).</li>
             <li>No compartir datos personales ni establecer contacto fuera de la plataforma.</li>
           </ul>
 
-          <h4>9. MODERACIÓN Y SEGURIDAD</h4>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>9. MODERACIÓN Y SEGURIDAD</h4>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Todas las sesiones serán moderadas por personal designado.</li>
             <li>Se prohíbe expresamente: el intercambio de datos personales y conductas inapropiadas o riesgosas.</li>
             <li>La plataforma podrá suspender cuentas en caso de incumplimiento.</li>
           </ul>
 
-          <h4>10. PAGOS Y REEMBOLSOS</h4>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>10. PAGOS Y REEMBOLSOS</h4>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Los pagos se realizan mediante QR, transferencia u otros medios habilitados.</li>
             <li>Política de reembolso: ✔ Procede si la sesión no se realiza por causas del mentor o la plataforma. ✘ No procede si la falla es atribuible al usuario, por ejemplo no acceder a las sesiones programadas.</li>
           </ul>
 
-          <h4>11. PROPIEDAD INTELECTUAL</h4>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>11. PROPIEDAD INTELECTUAL</h4>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Todo el contenido (apuntes, videos, materiales) es para uso personal.</li>
             <li>Está prohibida su reproducción, distribución o comercialización.</li>
           </ul>
 
-          <h4>12. LIMITACIÓN DE RESPONSABILIDAD</h4>
-          <p>VINCOBO no garantiza resultados académicos o profesionales derivados de las mentorías.</p>
-          <p>La plataforma actúa como intermediaria y no sustituye formación académica formal.</p>
-          <p>VINCOBO no será responsable por el uso indebido de la plataforma por parte de menores de edad cuando medie falsedad en la información proporcionada o ausencia de autorización del tutor legal.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>12. LIMITACIÓN DE RESPONSABILIDAD</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO no garantiza resultados académicos o profesionales derivados de las mentorías.</p>
+          <p style={{ marginBottom: '12px' }}>La plataforma actúa como intermediaria y no sustituye formación académica formal.</p>
+          <p style={{ marginBottom: '12px' }}>VINCOBO no será responsable por el uso indebido de la plataforma por parte de menores de edad cuando medie falsedad en la información proporcionada o ausencia de autorización del tutor legal.</p>
 
-          <h4>13. MODIFICACIONES</h4>
-          <p>VINCOBO podrá modificar estos términos a tal efecto, notificará a los usuarios mediante la plataforma.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>13. MODIFICACIONES</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO podrá modificar estos términos a tal efecto, notificará a los usuarios mediante la plataforma.</p>
 
-          <h4>14. LEGISLACIÓN APLICABLE</h4>
-          <p>Estos términos se rigen por la normativa vigente del Estado Plurinacional de Bolivia, Constitución Política del Estado, Código Niño, Niña y Adolescente.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>14. LEGISLACIÓN APLICABLE</h4>
+          <p style={{ marginBottom: '12px' }}>Estos términos se rigen por la normativa vigente del Estado Plurinacional de Bolivia, Constitución Política del Estado, Código Niño, Niña y Adolescente.</p>
 
-          <p style={{ marginTop: '20px', fontSize: '12px', color: 'var(--gray)' }}>Última actualización: 13 de mayo de 2026</p>
+          <p style={{ marginTop: '20px', fontSize: 'clamp(10px, 3vw, 12px)', color: 'var(--gray)' }}>Última actualización: 13 de mayo de 2026</p>
         </div>
-        <div style={{ padding: '16px 24px', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'flex-end', background: 'white', position: 'sticky', bottom: 0 }}>
-          <button onClick={onClose} className="btn btn-primary" style={{ padding: '8px 24px' }}>Cerrar</button>
+        <div style={{ 
+          padding: '16px 20px', 
+          borderTop: '1px solid #E2E8F0', 
+          display: 'flex', 
+          justifyContent: 'flex-end', 
+          background: 'white', 
+          position: 'sticky', 
+          bottom: 0,
+          flexShrink: 0
+        }}>
+          <button 
+            onClick={onClose} 
+            className="btn btn-primary" 
+            style={{ 
+              padding: '10px 24px',
+              fontSize: 'clamp(12px, 4vw, 14px)'
+            }}
+          >
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
   )
 }
-
-// Modal para Política de Privacidad
+// Modal para Política de Privacidad - VERSIÓN RESPONSIVE
 const ModalPrivacidad = ({ isOpen, onClose }) => {
   if (!isOpen) return null
+  
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000, animation: 'modalFadeIn 0.2s ease' }}>
-      <div style={{ backgroundColor: 'white', borderRadius: '16px', maxWidth: '700px', width: '90%', maxHeight: '80vh', overflowY: 'auto', boxShadow: '0 20px 35px rgba(0,0,0,0.2)', margin: '20px' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, background: 'white' }}>
-          <h3 style={{ color: 'var(--primary)', margin: 0 }}>Política de Privacidad</h3>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: '28px', cursor: 'pointer', color: 'var(--gray)' }}>×</button>
+    <div style={{ 
+      position: 'fixed', 
+      top: 0, 
+      left: 0, 
+      right: 0, 
+      bottom: 0, 
+      backgroundColor: 'rgba(0,0,0,0.5)', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      zIndex: 10000, 
+      animation: 'modalFadeIn 0.2s ease',
+      padding: '16px',
+      boxSizing: 'border-box'
+    }}>
+      <div style={{ 
+        backgroundColor: 'white', 
+        borderRadius: '16px', 
+        maxWidth: '700px', 
+        width: '100%', 
+        maxHeight: '85vh', 
+        overflowY: 'auto', 
+        boxShadow: '0 20px 35px rgba(0,0,0,0.2)',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative'
+      }}>
+        <div style={{ 
+          padding: '16px 20px', 
+          borderBottom: '1px solid #E2E8F0', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          position: 'sticky', 
+          top: 0, 
+          background: 'white', 
+          zIndex: 1,
+          flexShrink: 0
+        }}>
+          <h3 style={{ color: 'var(--primary)', margin: 0, fontSize: 'clamp(16px, 5vw, 20px)' }}>Política de Privacidad</h3>
+          <button 
+            onClick={onClose} 
+            style={{ 
+              background: 'none', 
+              border: 'none', 
+              fontSize: '28px', 
+              cursor: 'pointer', 
+              color: 'var(--gray)',
+              width: '36px',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '50%',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#F1F5F9'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+          >
+            ×
+          </button>
         </div>
-        <div style={{ padding: '24px', fontSize: '14px', lineHeight: '1.6' }}>
-          <p style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px' }}>POLÍTICA DE PRIVACIDAD – VINCOBO</p>
+        <div style={{ 
+          padding: '20px', 
+          fontSize: 'clamp(12px, 4vw, 14px)', 
+          lineHeight: '1.6',
+          overflowY: 'auto',
+          flex: 1
+        }}>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px', fontSize: 'clamp(13px, 4vw, 16px)' }}>
+            POLÍTICA DE PRIVACIDAD – VINCOBO
+          </p>
 
-          <h4>1. RESPONSABLE DEL TRATAMIENTO</h4>
-          <p>VINCOBO es responsable del tratamiento de datos personales recopilados a través de la plataforma.</p>
-          <p>Los datos proporcionados serán considerados como declarados voluntariamente por el usuario bajo presunción de veracidad.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>1. RESPONSABLE DEL TRATAMIENTO</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO es responsable del tratamiento de datos personales recopilados a través de la plataforma.</p>
+          <p style={{ marginBottom: '12px' }}>Los datos proporcionados serán considerados como declarados voluntariamente por el usuario bajo presunción de veracidad.</p>
 
-          <h4>2. DATOS RECOPILADOS</h4>
-          <p>Se podrán recopilar:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>2. DATOS RECOPILADOS</h4>
+          <p style={{ marginBottom: '12px' }}>Se podrán recopilar:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Datos de identificación (nombre, edad, correo).</li>
             <li>Datos del tutor legal (en caso de menores).</li>
             <li>Información académica y de intereses.</li>
@@ -163,77 +310,95 @@ const ModalPrivacidad = ({ isOpen, onClose }) => {
             <li>VINCOBO no será responsable cuando exista falsedad o suplantación en la información proporcionada.</li>
           </ul>
 
-          <h4>3. FINALIDAD DEL TRATAMIENTO</h4>
-          <p>Los datos serán utilizados para:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>3. FINALIDAD DEL TRATAMIENTO</h4>
+          <p style={{ marginBottom: '12px' }}>Los datos serán utilizados para:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Gestionar el acceso a la plataforma.</li>
             <li>Coordinar mentorías.</li>
             <li>Garantizar la seguridad de las sesiones.</li>
             <li>Mejorar el servicio mediante análisis estadístico.</li>
           </ul>
-          <p>Los datos estadísticos serán utilizados de forma anonimizada y agregada.</p>
+          <p style={{ marginBottom: '12px' }}>Los datos estadísticos serán utilizados de forma anonimizada y agregada.</p>
 
-          <h4>4. TRATAMIENTO DE DATOS DE MENORES</h4>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>4. TRATAMIENTO DE DATOS DE MENORES</h4>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>El tratamiento de datos de menores requiere consentimiento expreso del padre, madre o tutor legal.</li>
             <li>VINCOBO implementa medidas reforzadas de seguridad y control.</li>
             <li>No se recolectarán datos innecesarios del menor.</li>
           </ul>
 
-          <h4>5. CONSENTIMIENTO</h4>
-          <p>El usuario (o su tutor legal) autoriza el tratamiento de sus datos al aceptar los términos.</p>
-          <p>En el caso de menores:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>5. CONSENTIMIENTO</h4>
+          <p style={{ marginBottom: '12px' }}>El usuario (o su tutor legal) autoriza el tratamiento de sus datos al aceptar los términos.</p>
+          <p style={{ marginBottom: '12px' }}>En el caso de menores:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>El consentimiento se verificará a partir del consentimiento expreso del padre, madre o tutor legal.</li>
             <li>Puede ser revocado en cualquier momento.</li>
             <li>El consentimiento se entenderá otorgado de buena fe con base en la información proporcionada por el usuario.</li>
             <li>VINCOBO podrá implementar mecanismos adicionales de verificación sin que ello implique obligación de garantizar la veracidad absoluta de los datos.</li>
           </ul>
 
-          <h4>6. SEGURIDAD DE LA INFORMACIÓN</h4>
-          <p>VINCOBO adopta medidas técnicas y organizativas para proteger los datos contra:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>6. SEGURIDAD DE LA INFORMACIÓN</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO adopta medidas técnicas y organizativas para proteger los datos contra:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Accesos no autorizados</li>
             <li>Pérdida o alteración</li>
             <li>Uso indebido</li>
           </ul>
-          <p>El usuario declara contar con las autorizaciones necesarias para la grabación, especialmente en caso de menores de edad.</p>
+          <p style={{ marginBottom: '12px' }}>El usuario declara contar con las autorizaciones necesarias para la grabación, especialmente en caso de menores de edad.</p>
 
-          <h4>7. GRABACIÓN DE SESIONES</h4>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>7. GRABACIÓN DE SESIONES</h4>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Todas las sesiones son grabadas por razones de seguridad y control de calidad.</li>
             <li>El usuario acepta expresamente esta condición.</li>
             <li>Estas grabaciones no serán divulgadas públicamente.</li>
           </ul>
 
-          <h4>8. CESIÓN DE DATOS</h4>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>8. CESIÓN DE DATOS</h4>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>No se compartirán datos personales con terceros sin consentimiento.</li>
             <li>Solo se podrá compartir información anonimizada para fines comerciales o estadísticos.</li>
           </ul>
 
-          <h4>9. DERECHOS DEL USUARIO</h4>
-          <p>El usuario (o su tutor) podrá:</p>
-          <ul style={{ marginLeft: '20px' }}>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>9. DERECHOS DEL USUARIO</h4>
+          <p style={{ marginBottom: '12px' }}>El usuario (o su tutor) podrá:</p>
+          <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Acceder a sus datos</li>
             <li>Solicitar rectificación</li>
             <li>Solicitar eliminación</li>
             <li>Oponerse al tratamiento</li>
           </ul>
 
-          <h4>10. CONSERVACIÓN DE DATOS</h4>
-          <p>Los datos serán conservados únicamente por el tiempo necesario para cumplir las finalidades descritas.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>10. CONSERVACIÓN DE DATOS</h4>
+          <p style={{ marginBottom: '12px' }}>Los datos serán conservados únicamente por el tiempo necesario para cumplir las finalidades descritas.</p>
 
-          <h4>11. MODIFICACIONES</h4>
-          <p>VINCOBO podrá actualizar esta política en cualquier momento.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>11. MODIFICACIONES</h4>
+          <p style={{ marginBottom: '12px' }}>VINCOBO podrá actualizar esta política en cualquier momento.</p>
 
-          <h4>12. CONTACTO</h4>
-          <p>Para consultas sobre privacidad o tratamiento de datos, el usuario podrá comunicarse con la plataforma mediante los canales oficiales.</p>
+          <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>12. CONTACTO</h4>
+          <p style={{ marginBottom: '12px' }}>Para consultas sobre privacidad o tratamiento de datos, el usuario podrá comunicarse con la plataforma mediante los canales oficiales.</p>
 
-          <p style={{ marginTop: '20px', fontSize: '12px', color: 'var(--gray)' }}>Última actualización: 13 de mayo de 2026</p>
+          <p style={{ marginTop: '20px', fontSize: 'clamp(10px, 3vw, 12px)', color: 'var(--gray)' }}>Última actualización: 13 de mayo de 2026</p>
         </div>
-        <div style={{ padding: '16px 24px', borderTop: '1px solid #E2E8F0', display: 'flex', justifyContent: 'flex-end', background: 'white', position: 'sticky', bottom: 0 }}>
-          <button onClick={onClose} className="btn btn-primary" style={{ padding: '8px 24px' }}>Cerrar</button>
+        <div style={{ 
+          padding: '16px 20px', 
+          borderTop: '1px solid #E2E8F0', 
+          display: 'flex', 
+          justifyContent: 'flex-end', 
+          background: 'white', 
+          position: 'sticky', 
+          bottom: 0,
+          flexShrink: 0
+        }}>
+          <button 
+            onClick={onClose} 
+            className="btn btn-primary" 
+            style={{ 
+              padding: '10px 24px',
+              fontSize: 'clamp(12px, 4vw, 14px)'
+            }}
+          >
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
