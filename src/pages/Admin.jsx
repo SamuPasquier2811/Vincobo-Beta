@@ -689,8 +689,21 @@ export default function Admin() {
 
             <nav className="navbar" style={{ background: 'var(--primary)', color: 'white' }}>
                 <div className="container navbar-content">
-                    <button onClick={() => navigate('/')} className="btn-nav" style={{ background: 'white', color: 'var(--primary)', borderColor: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <IconArrowLeft /> Volver al inicio
+                    <button 
+                      onClick={() => navigate('/')} 
+                      className="btn-nav" 
+                      style={{ 
+                        background: 'white', 
+                        color: 'var(--primary)', 
+                        borderColor: 'white', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '8px',
+                        padding: '8px 12px'
+                      }}
+                    >
+                      <IconArrowLeft /> 
+                      <span style={{ display: 'inline-block' }}>Volver al inicio</span>
                     </button>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -992,6 +1005,127 @@ export default function Admin() {
                 @keyframes slideIn {
                     from { transform: translateX(100%); opacity: 0; }
                     to { transform: translateX(0); opacity: 1; }
+                }
+                @media (max-width: 768px) {
+                    .navbar .container {
+                        flex-wrap: wrap;
+                        gap: 10px;
+                    }
+                    
+                    .navbar .btn-nav span {
+                        display: none;
+                    }
+                    
+                    .navbar .btn-nav {
+                        padding: 8px 12px !important;
+                    }
+                    
+                    div[style*="display: flex"][style*="gap: 10px"][style*="marginBottom: 30px"] {
+                        overflow-x: auto;
+                        flex-wrap: nowrap !important;
+                        justify-content: flex-start !important;
+                        padding-bottom: 10px;
+                    }
+                    
+                    button[onclick*="setPestanaActiva"] {
+                        padding: 8px 16px !important;
+                        font-size: 12px !important;
+                        white-space: nowrap;
+                    }
+                    
+                    div[style*="borderBottom: 1px solid #E2E8F0"] {
+                        overflow-x: auto;
+                        flex-wrap: nowrap !important;
+                        padding-bottom: 10px;
+                    }
+                    
+                    div[style*="borderBottom: 1px solid #E2E8F0"] button {
+                        white-space: nowrap;
+                        font-size: 11px !important;
+                        padding: 6px 12px !important;
+                    }
+                    
+                    .card {
+                        padding: 16px !important;
+                    }
+                    
+                    div[style*="gridTemplateColumns: repeat(auto-fit, minmax(280px, 1fr))"] {
+                        grid-template-columns: 1fr !important;
+                        gap: 10px !important;
+                    }
+                    
+                    div[style*="position: fixed"][style*="transform: translate(-50%, -50%)"] {
+                        width: 90% !important;
+                        max-width: 90% !important;
+                        padding: 20px !important;
+                    }
+                    
+                    button[onclick="exportarAExcel"] {
+                        padding: 8px 12px !important;
+                        font-size: 12px !important;
+                    }
+                    
+                    div[style*="position: absolute"][style*="width: 350px"] {
+                        width: 280px !important;
+                        right: -20px !important;
+                    }
+                    
+                    h2 {
+                        font-size: 18px !important;
+                    }
+                    
+                    h3 {
+                        font-size: 16px !important;
+                    }
+                    
+                    .form-input, .btn {
+                        font-size: 13px !important;
+                    }
+                    
+                    div[style*="display: flex"][style*="gap: 10px"][style*="marginTop: 20px"] {
+                        flex-direction: column;
+                    }
+                    
+                    div[style*="display: flex"][style*="gap: 10px"][style*="marginTop: 20px"] button {
+                        width: 100% !important;
+                        justify-content: center !important;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .navbar .logo {
+                        font-size: 18px !important;
+                    }
+                    
+                    span[style*="padding: 4px 12px"] {
+                        font-size: 9px !important;
+                        padding: 3px 8px !important;
+                    }
+                    
+                    div[style*="background: #F1F5F9"][style*="borderRadius: 8px"] {
+                        padding: 10px !important;
+                    }
+                    
+                    p, .form-label {
+                        font-size: 12px !important;
+                    }
+                    
+                    div[style*="position: relative"][style*="maxWidth: 400px"] {
+                        max-width: 100% !important;
+                    }
+                    
+                    input[placeholder*="Buscar"] {
+                        font-size: 12px !important;
+                        padding: 10px 10px 10px 40px !important;
+                    }
+                    
+                    div[style*="position: fixed"][style*="transform: translate(-50%, -50%)"] {
+                        padding: 16px !important;
+                    }
+                    
+                    div[style*="position: fixed"][style*="transform: translate(-50%, -50%)"] h3 {
+                        font-size: 16px !important;
+                    }
                 }
             `}</style>
         </div>
