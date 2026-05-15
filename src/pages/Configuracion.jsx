@@ -378,74 +378,84 @@ export default function Configuracion() {
                     
                     {/* Botón para cambiar contraseña (para todos los usuarios) */}
                     {!cambiandoPassword ? (
-                        <button 
-                            onClick={() => setCambiandoPassword(true)}
-                            className="btn btn-secondary"
-                            style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}
-                        >
-                            <IconKey /> Cambiar contraseña
-                        </button>
+                      <button 
+                        onClick={() => setCambiandoPassword(true)}
+                        className="btn btn-secondary"
+                        style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px', width: 'auto' }}
+                      >
+                        <IconKey /> Cambiar contraseña
+                      </button>
                     ) : (
-                        <div style={{ marginTop: '20px', padding: '20px', background: '#F1F5F9', borderRadius: '8px' }}>
-                            <h4 style={{ marginBottom: '15px', color: 'var(--primary)' }}>Cambiar contraseña</h4>
-                            <div className="form-group">
-                                <label className="form-label">Nueva contraseña</label>
-                                <div style={{ position: 'relative' }}>
-                                    <input 
-                                        type={mostrarNuevaPassword ? 'text' : 'password'}
-                                        className="form-input" 
-                                        value={nuevaPassword} 
-                                        onChange={(e) => setNuevaPassword(e.target.value)}
-                                        placeholder="Mínimo 6 caracteres"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setMostrarNuevaPassword(!mostrarNuevaPassword)}
-                                        style={{
-                                            position: 'absolute',
-                                            right: '10px',
-                                            top: '50%',
-                                            transform: 'translateY(-50%)',
-                                            background: 'none',
-                                            border: 'none',
-                                            cursor: 'pointer',
-                                            fontSize: '14px'
-                                        }}
-                                    >
-                                        {mostrarNuevaPassword ? '👁️' : '👁️‍🗨️'}
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label className="form-label">Confirmar nueva contraseña</label>
-                                <input 
-                                    type="password"
-                                    className="form-input" 
-                                    value={confirmarNuevaPassword} 
-                                    onChange={(e) => setConfirmarNuevaPassword(e.target.value)}
-                                    placeholder="Repite tu nueva contraseña"
-                                />
-                            </div>
-                            <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-                                <button 
-                                    onClick={() => {
-                                        setCambiandoPassword(false)
-                                        setNuevaPassword('')
-                                        setConfirmarNuevaPassword('')
-                                    }}
-                                    className="btn btn-secondary"
-                                >
-                                    Cancelar
-                                </button>
-                                <button 
-                                    onClick={handleCambiarPassword}
-                                    className="btn btn-primary"
-                                    disabled={cambiandoPasswordEstado || !nuevaPassword || !confirmarNuevaPassword}
-                                >
-                                    {cambiandoPasswordEstado ? 'Actualizando...' : 'Actualizar contraseña'}
-                                </button>
-                            </div>
+                      <div style={{ marginTop: '20px', padding: '20px', background: '#F1F5F9', borderRadius: '8px' }}>
+                        <h4 style={{ marginBottom: '15px', color: 'var(--primary)' }}>Cambiar contraseña</h4>
+                        <div className="form-group">
+                          <label className="form-label">Nueva contraseña</label>
+                          <div style={{ position: 'relative' }}>
+                            <input 
+                              type={mostrarNuevaPassword ? 'text' : 'password'}
+                              className="form-input" 
+                              value={nuevaPassword} 
+                              onChange={(e) => setNuevaPassword(e.target.value)}
+                              placeholder="Mínimo 6 caracteres"
+                              style={{ width: '100%', boxSizing: 'border-box' }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setMostrarNuevaPassword(!mostrarNuevaPassword)}
+                              style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontSize: '14px'
+                              }}
+                            >
+                              {mostrarNuevaPassword ? '👁️' : '👁️‍🗨️'}
+                            </button>
+                          </div>
                         </div>
+                        <div className="form-group">
+                          <label className="form-label">Confirmar nueva contraseña</label>
+                          <input 
+                            type="password"
+                            className="form-input" 
+                            value={confirmarNuevaPassword} 
+                            onChange={(e) => setConfirmarNuevaPassword(e.target.value)}
+                            placeholder="Repite tu nueva contraseña"
+                            style={{ width: '100%', boxSizing: 'border-box' }}
+                          />
+                        </div>
+                        <div style={{ 
+                          display: 'flex', 
+                          flexDirection: 'row',
+                          gap: '10px',
+                          marginTop: '20px',
+                          flexWrap: 'wrap'
+                        }}>
+                          <button 
+                            onClick={() => {
+                              setCambiandoPassword(false)
+                              setNuevaPassword('')
+                              setConfirmarNuevaPassword('')
+                            }}
+                            className="btn btn-secondary"
+                            style={{ flex: 1, minWidth: '120px' }}
+                          >
+                            Cancelar
+                          </button>
+                          <button 
+                            onClick={handleCambiarPassword}
+                            className="btn btn-primary"
+                            disabled={cambiandoPasswordEstado || !nuevaPassword || !confirmarNuevaPassword}
+                            style={{ flex: 1, minWidth: '120px' }}
+                          >
+                            {cambiandoPasswordEstado ? 'Actualizando...' : 'Actualizar contraseña'}
+                          </button>
+                        </div>
+                      </div>
                     )}
                     
                     {/* Botones de acción para edición de datos personales */}
@@ -474,7 +484,21 @@ export default function Configuracion() {
                 </div>
             </div>
 
-            <style>{`@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }`}</style>
+            <style>{`
+                @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+                @media (max-width: 640px) {
+                  .card {
+                    padding: 16px !important;
+                  }
+                  
+                  .form-input, .btn {
+                    font-size: 14px !important;
+                  }
+                  .btn-secondary, .btn-primary {
+                    width: 100% !important;
+                  }
+                }
+            `}</style>
         </div>
     )
 }
