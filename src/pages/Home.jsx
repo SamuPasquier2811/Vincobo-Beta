@@ -28,7 +28,6 @@ export default function Home() {
       setUser(user)
       
       if (user) {
-        // Obtener el rol del usuario
         const { data: perfil } = await supabase
           .from('perfiles')
           .select('rol')
@@ -73,17 +72,20 @@ export default function Home() {
     navigate('/historial')
   }
 
-  // Filtrar carreras según búsqueda
   const carrerasFiltradas = carreras.filter(c => 
     c.nombre.toLowerCase().includes(busqueda.toLowerCase())
   )
 
   return (
-    <div>
+    <div style={{ overflowX: 'hidden' }}>
       {/* Navbar */}
-      <nav className="navbar">
-        <div className="container navbar-content">
-          <span className="logo">Vincobo</span>
+      <nav className="navbar" style={{ padding: '12px 0' }}>
+        <div className="container navbar-content" style={{ 
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '10px'
+        }}>
+          <span className="logo" style={{ fontSize: 'clamp(20px, 5vw, 28px)' }}>Vincobo</span>
           
           {user ? (
             <div style={{ position: 'relative' }}>
@@ -94,15 +96,15 @@ export default function Home() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  padding: '8px 16px'
+                  padding: '8px 16px',
+                  fontSize: 'clamp(12px, 3vw, 14px)'
                 }}
               >
                 <IconUser />
-                <span>Mi cuenta</span>
+                <span style={{ display: 'inline-block' }}>Mi cuenta</span>
                 <IconArrowDown />
               </button>
 
-              {/* Menú desplegable */}
               {mostrarMenu && (
                 <>
                   <div
@@ -125,7 +127,7 @@ export default function Home() {
                     backgroundColor: 'white',
                     borderRadius: '8px',
                     boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                    width: '240px',
+                    width: 'clamp(200px, 80vw, 240px)',
                     zIndex: 1000,
                     overflow: 'hidden'
                   }}>
@@ -138,73 +140,74 @@ export default function Home() {
                         background: 'none',
                         textAlign: 'left',
                         cursor: 'pointer',
-                        fontSize: '14px',
+                        fontSize: 'clamp(12px, 3vw, 14px)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '12px',
                         borderBottom: '1px solid #E2E8F0',
                         color: 'var(--dark)'
                       }}
-                      onMouseEnter={(e) => e.target.style.backgroundColor = '#F1F5F9'}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F1F5F9'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                     >
                       <IconHistory />
                       <span>Historial de reservas</span>
                     </button>
+                    
                     {(userRol !== 'usuario' && userRol !== null) && (
                       <button
-                          onClick={() => {
-                              setMostrarMenu(false)
-                              navigate('/dashboard')
-                          }}
-                          style={{
-                              width: '100%',
-                              padding: '12px 16px',
-                              border: 'none',
-                              background: 'none',
-                              textAlign: 'left',
-                              cursor: 'pointer',
-                              fontSize: '14px',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '12px',
-                              borderBottom: '1px solid #E2E8F0',
-                              color: 'var(--dark)'
-                          }}
-                          onMouseEnter={(e) => e.target.style.backgroundColor = '#F1F5F9'}
-                          onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
+                        onClick={() => {
+                          setMostrarMenu(false)
+                          navigate('/dashboard')
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '12px 16px',
+                          border: 'none',
+                          background: 'none',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          fontSize: 'clamp(12px, 3vw, 14px)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '12px',
+                          borderBottom: '1px solid #E2E8F0',
+                          color: 'var(--dark)'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F1F5F9'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                       >
-                          <IconDashboard />
-                          <span>Mi Dashboard</span>
+                        <IconDashboard />
+                        <span>Mi Dashboard</span>
                       </button>
                     )}
 
                     <button
-                        onClick={() => {
-                            setMostrarMenu(false)
-                            navigate('/configuracion')
-                        }}
-                        style={{
-                            width: '100%',
-                            padding: '12px 16px',
-                            border: 'none',
-                            background: 'none',
-                            textAlign: 'left',
-                            cursor: 'pointer',
-                            fontSize: '14px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '12px',
-                            borderBottom: '1px solid #E2E8F0',
-                            color: 'var(--dark)'
-                        }}
-                        onMouseEnter={(e) => e.target.style.backgroundColor = '#F1F5F9'}
-                        onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
+                      onClick={() => {
+                        setMostrarMenu(false)
+                        navigate('/configuracion')
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        border: 'none',
+                        background: 'none',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontSize: 'clamp(12px, 3vw, 14px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px',
+                        borderBottom: '1px solid #E2E8F0',
+                        color: 'var(--dark)'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F1F5F9'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                     >
-                        <IconSettings />
-                        <span>Mi configuración</span>
+                      <IconSettings />
+                      <span>Mi configuración</span>
                     </button>
-                    {/* Opción Admin - basada en ROL */}
+                    
                     {userRol === 'admin' && (
                       <button
                         onClick={() => {
@@ -218,7 +221,7 @@ export default function Home() {
                           background: 'none',
                           textAlign: 'left',
                           cursor: 'pointer',
-                          fontSize: '14px',
+                          fontSize: 'clamp(12px, 3vw, 14px)',
                           display: 'flex',
                           alignItems: 'center',
                           gap: '12px',
@@ -226,8 +229,8 @@ export default function Home() {
                           color: 'var(--primary)',
                           fontWeight: '500'
                         }}
-                        onMouseEnter={(e) => e.target.style.backgroundColor = '#F1F5F9'}
-                        onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F1F5F9'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                       >
                         <IconSettings />
                         <span>Administración</span>
@@ -243,14 +246,14 @@ export default function Home() {
                         background: 'none',
                         textAlign: 'left',
                         cursor: 'pointer',
-                        fontSize: '14px',
+                        fontSize: 'clamp(12px, 3vw, 14px)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '12px',
                         color: 'var(--error)'
                       }}
-                      onMouseEnter={(e) => e.target.style.backgroundColor = '#FEE2E2'}
-                      onMouseLeave={(e) => e.target.style.backgroundColor = 'white'}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FEE2E2'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                     >
                       <IconLogout />
                       <span>Cerrar sesión</span>
@@ -263,6 +266,7 @@ export default function Home() {
             <button 
               onClick={() => navigate('/login')}
               className="btn btn-secondary"
+              style={{ fontSize: 'clamp(12px, 3vw, 14px)', padding: '8px 16px' }}
             >
               Iniciar Sesión
             </button>
@@ -270,25 +274,34 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - VERSIÓN RESPONSIVE */}
       <div style={{ 
         background: 'var(--primary)',
         color: 'white',
-        padding: '60px 0',
+        padding: 'clamp(40px, 8vw, 80px) 20px',
         textAlign: 'center'
       }}>
         <div className="container">
-          <h1 style={{ fontSize: '48px', marginBottom: '20px' }}>
+          <h1 style={{ 
+            fontSize: 'clamp(28px, 6vw, 48px)', 
+            marginBottom: '16px',
+            padding: '0 10px'
+          }}>
             Deja de imaginar tu carrera... Empieza a conocerla
           </h1>
-          <p style={{ fontSize: '20px', marginBottom: '30px', opacity: 0.9 }}>
+          <p style={{ 
+            fontSize: 'clamp(16px, 4vw, 20px)', 
+            marginBottom: '24px', 
+            opacity: 0.9,
+            padding: '0 10px'
+          }}>
             Conversa con quién estudia, lo que tú sueñas
           </p>
           
-          {/* Buscador con icono */}
           <div style={{
             position: 'relative',
-            maxWidth: '600px',
+            maxWidth: '90%',
+            width: '100%',
             margin: '0 auto'
           }}>
             <input
@@ -298,16 +311,16 @@ export default function Home() {
               onChange={(e) => setBusqueda(e.target.value)}
               style={{
                 width: '100%',
-                padding: '15px 20px 15px 50px',
+                padding: 'clamp(12px, 4vw, 15px) 20px clamp(12px, 4vw, 15px) 45px',
                 border: 'none',
                 borderRadius: '50px',
-                fontSize: '16px',
+                fontSize: 'clamp(14px, 4vw, 16px)',
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
               }}
             />
             <div style={{
               position: 'absolute',
-              left: '20px',
+              left: '16px',
               top: '50%',
               transform: 'translateY(-50%)',
               color: 'var(--gray)'
@@ -316,28 +329,68 @@ export default function Home() {
             </div>
           </div>
           
-          <p style={{ marginTop: '15px', fontSize: '14px', opacity: 0.8 }}>
+          <p style={{ 
+            marginTop: '15px', 
+            fontSize: 'clamp(12px, 3vw, 14px)', 
+            opacity: 0.8 
+          }}>
             {carrerasFiltradas.length} carreras disponibles
           </p>
         </div>
       </div>
 
       {/* Lista de carreras */}
-      <div className="container">
+      <div className="container" style={{ padding: '20px' }}>
         {cargando ? (
           <p className="text-center" style={{ padding: '40px' }}>Cargando carreras...</p>
         ) : (
-          <div className="carreras-grid">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: '20px',
+            padding: '10px 0'
+          }}>
             {carrerasFiltradas.map(carrera => (
-              <div key={carrera.id} className="carrera-card">
-                <div className="carrera-nombre" style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'left' }}>
-                  <IconBook />
-                  {carrera.nombre}
+              <div 
+                key={carrera.id} 
+                className="carrera-card"
+                style={{
+                  background: 'white',
+                  borderRadius: '12px',
+                  padding: '20px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)'
+                }}
+              >
+                <div className="carrera-nombre" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px', 
+                  marginBottom: '15px',
+                  fontSize: 'clamp(16px, 4vw, 18px)',
+                  fontWeight: '500',
+                  color: 'var(--primary)',
+                  wordBreak: 'break-word'
+                }}>
+                  <IconBook style={{ flexShrink: 0 }} />
+                  <span style={{ wordBreak: 'break-word' }}>{carrera.nombre}</span>
                 </div>
                 <button 
                   onClick={() => handleReservar(carrera)}
                   className="btn btn-primary"
-                  style={{ width: '100%' }}
+                  style={{ 
+                    width: '100%',
+                    padding: '12px',
+                    fontSize: 'clamp(14px, 3.5vw, 16px)'
+                  }}
                 >
                   Reservar Mentor
                 </button>
@@ -346,6 +399,27 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {/* CSS Responsive adicional */}
+      <style>{`
+        @media (max-width: 768px) {
+          .navbar-content {
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          
+          .carreras-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+        }
+      `}</style>
     </div>
   )
 }
