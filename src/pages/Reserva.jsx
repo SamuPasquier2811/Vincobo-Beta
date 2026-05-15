@@ -485,7 +485,7 @@ export default function Reserva() {
 
   // Calcular duración según tipo de servicio
   const calcularDuracion = () => {
-    return tipoServicio === 'consulta' ? '15-25min' : '45-60min'
+    return tipoServicio === 'consulta' ? '15' : '45'
   }
 
   // Validaciones en tiempo real
