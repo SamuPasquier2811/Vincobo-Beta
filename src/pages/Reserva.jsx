@@ -1314,7 +1314,7 @@ export default function Reserva() {
                       <button type="button" onClick={() => setMostrarPrivacidad(true)} style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}>
                         Política de Privacidad
                       </button>
-                      {' y autorizo que la sesión sea grabada para precautelar la seguridad'}
+                      {' y autorizo que la sesión sea grabada.'}
                     </label>
                   </div>
 
