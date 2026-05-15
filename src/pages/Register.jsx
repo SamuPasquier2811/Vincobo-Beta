@@ -333,7 +333,7 @@ export default function Register() {
                 className="form-input"
                 value={formData.nombre_completo}
                 onChange={handleChange}
-                placeholder="Ej: Juan Pérez"
+                placeholder="Ej: Juan José Pérez Pérez"
                 style={{
                   borderColor: errores.nombre_completo ? 'var(--error)' : '#E2E8F0'
                 }}
@@ -392,7 +392,7 @@ export default function Register() {
                     className="form-input"
                     value={formData.nombre_menor}
                     onChange={handleChange}
-                    placeholder="Ej: Carlitos Pérez"
+                    placeholder="Ej: Carlitos Enrique Pérez García"
                     style={{
                       borderColor: errores.nombre_menor ? 'var(--error)' : '#E2E8F0'
                     }}
