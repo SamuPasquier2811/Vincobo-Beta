@@ -877,7 +877,7 @@ export default function Reserva() {
                   color: 'var(--primary)'
                 }}>
                   <IconChild style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <strong style={{ flexShrink: 0 }}>Padre/Madre/Tutor de:</strong>
+                  <strong style={{ flexShrink: 0 }}>Padre/Madre/Tutor(a) de:</strong>
                   <span style={{ wordBreak: 'break-word', flex: 1 }}>{perfil.nombre_menor}</span>
                 </div>
               )}
@@ -888,7 +888,7 @@ export default function Reserva() {
             {pasoActual === 1 && (
               <div style={{ animation: 'fadeIn 0.5s ease' }}>
                 <h3 style={{ marginBottom: '20px', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  {tipoUsuario === 'tutor' ? 'Datos del padre/madre/tutor' : 'Tus datos'}
+                  {tipoUsuario === 'tutor' ? 'Datos del padre/madre/tutor(a)' : 'Tus datos'}
                 </h3>
                 
                 <div className="form-group">
