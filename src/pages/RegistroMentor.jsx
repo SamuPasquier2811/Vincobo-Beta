@@ -617,7 +617,7 @@ export default function RegistroMentor() {
 
             <div className="form-group">
               <label className="form-label"><IconUser /> Nombre Completo</label>
-              <input type="text" className="form-input" required value={nombreCompleto} onChange={handleNombreChange} placeholder="Ej: Juan Pérez" style={{ borderColor: errores.nombreCompleto ? 'var(--error)' : '#E2E8F0' }} />
+              <input type="text" className="form-input" required value={nombreCompleto} onChange={handleNombreChange} placeholder="Ej: Juan José Pérez Pérez" style={{ borderColor: errores.nombreCompleto ? 'var(--error)' : '#E2E8F0' }} />
               {errores.nombreCompleto && <p className="error-message">{errores.nombreCompleto}</p>}
             </div>
 
