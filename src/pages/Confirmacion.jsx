@@ -77,7 +77,7 @@ ${interesesMentoria && interesesMentoria.length > 0 ? `📌 Interés principal: 
 ${situacionActual ? `📌 Situación actual: ${situacionActual}` : ''}
 ${horarioEspecifico ? `📌 Horario específico: ${horarioEspecifico}` : ''}
 Quisiera coordinar los detalles de la sesión. 
-Doy mi consentimiento para que ${nombreMenor || 'mi hijo/a'} participe en la mentoría y la misma sea grabada para precautelar la seguridad. 
+Doy mi consentimiento para que ${nombreMenor || 'mi hijo/a'} participe en la mentoría y la misma sea grabada. 
 Quedo atento a su confirmación. ¡Gracias!`
         } else {
             return `Hola Vincobo, soy ${nombreReservante || '[Nombre]'}. 
