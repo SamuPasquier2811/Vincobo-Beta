@@ -44,14 +44,12 @@ export default function Confirmacion() {
     const carreraStorage = localStorage.getItem('carreraSeleccionada') || 'tu mentoría'
     const carreraMostrar = carrera || carreraStorage
 
-    // Precios actualizados
     const getPrecioTexto = () => {
         if (precio) return precio
         if (tipoServicio === 'consulta') return 30
         return apuntesIncluidos ? 85 : 60
     }
 
-    // Duración actualizada
     const getDuracionTexto = () => {
         if (duracion === 15) return '15-25 minutos'
         if (duracion === 45) return '45-60 minutos'
@@ -116,18 +114,18 @@ Quedo atento a su confirmación. ¡Gracias!`
             alignItems: 'center', 
             justifyContent: 'center',
             background: 'linear-gradient(135deg, var(--light) 0%, #ffffff 100%)',
-            padding: '20px'
+            padding: 'clamp(16px, 5vw, 40px)'
         }}>
             <div className="card" style={{ 
                 maxWidth: '600px', 
                 width: '100%',
                 borderTop: '4px solid var(--primary)',
                 animation: 'fadeInUp 0.6s ease',
-                padding: '30px'
+                padding: 'clamp(20px, 5vw, 30px)'
             }}>
                 <div style={{
-                    width: '80px',
-                    height: '80px',
+                    width: 'clamp(60px, 15vw, 80px)',
+                    height: 'clamp(60px, 15vw, 80px)',
                     background: 'var(--primary)',
                     color: 'white',
                     borderRadius: '50%',
@@ -144,7 +142,7 @@ Quedo atento a su confirmación. ¡Gracias!`
                 <h2 style={{ 
                     marginBottom: '25px',
                     color: 'var(--primary)',
-                    fontSize: '28px',
+                    fontSize: 'clamp(22px, 6vw, 28px)',
                     fontWeight: '600',
                     textAlign: 'center'
                 }}>
@@ -153,95 +151,122 @@ Quedo atento a su confirmación. ¡Gracias!`
 
                 <div style={{
                     background: 'linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%)',
-                    padding: '25px',
+                    padding: 'clamp(16px, 4vw, 25px)',
                     borderRadius: '12px',
                     marginBottom: '25px',
                     textAlign: 'left',
                     borderLeft: '4px solid var(--primary)'
                 }}>
-                    <h4 style={{ marginBottom: '15px', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '16px' }}>
+                    <h4 style={{ marginBottom: '15px', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'clamp(14px, 4vw, 16px)' }}>
                         <IconBook /> Resumen de tu solicitud
                     </h4>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                            <IconUser /> <strong>Reservante:</strong> {nombreReservante || 'No especificado'}
+                        <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                            <IconUser style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                            <strong style={{ flexShrink: 0 }}>Reservante:</strong> 
+                            <span style={{ wordBreak: 'break-word', flex: 1 }}>{nombreReservante || 'No especificado'}</span>
                         </p>
                         
                         {tipoUsuario === 'tutor' && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconChild /> <strong>Menor:</strong> {nombreMenor || 'No especificado'}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconChild style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Menor:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{nombreMenor || 'No especificado'}</span>
                             </p>
                         )}
                         
                         {situacionActual && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconTarget /> <strong>Situación actual:</strong> {situacionActual}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconTarget style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Situación actual:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{situacionActual}</span>
                             </p>
                         )}
                         
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                            {tipoServicio === 'consulta' ? <IconConsult /> : <IconCareer />}
-                            <strong>Tipo de servicio:</strong> {getNombreServicio()} ({getDuracionTexto()})
+                        <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                            {tipoServicio === 'consulta' ? <IconConsult style={{ flexShrink: 0 }} /> : <IconCareer style={{ flexShrink: 0 }} />}
+                            <strong style={{ flexShrink: 0 }}>Tipo de servicio:</strong> 
+                            <span style={{ wordBreak: 'break-word', flex: 1 }}>{getNombreServicio()} ({getDuracionTexto()})</span>
                         </p>
                         
                         {tipoServicio === 'carrera' && apuntesIncluidos && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconNotes /> <strong>Apuntes digitales:</strong> Incluidos (+25 Bs)
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconNotes style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Apuntes digitales:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>Incluidos (+25 Bs)</span>
                             </p>
                         )}
                         
                         {tipoServicio === 'consulta' && temasInteres && temasInteres.length > 0 && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconConsult /> <strong>Temas de interés:</strong> {temasInteres.join(', ')}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconConsult style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Temas de interés:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{temasInteres.join(', ')}</span>
                             </p>
                         )}
                         
                         {tipoServicio === 'carrera' && interesesMentoria && interesesMentoria.length > 0 && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconBriefcase /> <strong>Interés principal:</strong> {interesesMentoria.join(', ')}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconBriefcase style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Interés principal:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{interesesMentoria.join(', ')}</span>
                             </p>
                         )}
                         
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                            <IconBook /> <strong>Carrera de interés:</strong> {carreraMostrar}
+                        <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                            <IconBook style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                            <strong style={{ flexShrink: 0 }}>Carrera de interés:</strong> 
+                            <span style={{ wordBreak: 'break-word', flex: 1 }}>{carreraMostrar}</span>
                         </p>
                         
                         {universidad && universidad !== 'Cualquiera' && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconUniversity /> <strong>Universidad/Institución de preferencia:</strong> {universidad}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconUniversity style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Universidad de preferencia:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{universidad}</span>
                             </p>
                         )}
                         
                         {fecha && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconCalendar /> <strong>Fecha para la mentoría:</strong> {formatearFecha(fecha)}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconCalendar style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Fecha:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{formatearFecha(fecha)}</span>
                             </p>
                         )}
                         
                         {turno && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconClock /> <strong>Turno (Horario para la mentoría):</strong> {
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconClock style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Turno:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{
                                     turno === 'mañana' ? 'Mañana' :
                                     turno === 'tarde' ? 'Tarde' : 'Noche'
-                                }
+                                }</span>
                             </p>
                         )}
                         
                         {horarioEspecifico && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconClock /> <strong>Horario específico:</strong> {horarioEspecifico}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconClock style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Horario específico:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{horarioEspecifico}</span>
                             </p>
                         )}
                         
                         {semestre && semestre !== '' && (
-                            <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                                <IconUniversity /> <strong>Semestre de preferencia del mentor:</strong> {semestre}
+                            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                <IconUniversity style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                <strong style={{ flexShrink: 0 }}>Semestre de preferencia:</strong> 
+                                <span style={{ wordBreak: 'break-word', flex: 1 }}>{semestre}</span>
                             </p>
                         )}
                         
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px' }}>
-                            <IconPrice /> <strong>Precio total:</strong> {getPrecioTexto()} Bs
+                        <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                            <IconPrice style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                            <strong style={{ flexShrink: 0 }}>Precio total:</strong> 
+                            <span style={{ wordBreak: 'break-word', flex: 1 }}>{getPrecioTexto()} Bs</span>
                         </p>
                         
                         {comentarios && (
@@ -251,10 +276,11 @@ Quedo atento a su confirmación. ¡Gracias!`
                                 background: 'white',
                                 borderRadius: '8px'
                             }}>
-                                <p style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', fontSize: '14px' }}>
-                                    <IconMessageSquare /> <strong>Comentarios adicionales:</strong>
+                                <p style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px', fontSize: 'clamp(13px, 3.5vw, 14px)' }}>
+                                    <IconMessageSquare style={{ flexShrink: 0, marginTop: '2px' }} /> 
+                                    <strong style={{ flexShrink: 0 }}>Comentarios adicionales:</strong>
                                 </p>
-                                <p style={{ marginLeft: '30px', fontSize: '14px', fontStyle: 'italic', color: 'var(--dark)' }}>
+                                <p style={{ marginLeft: 'clamp(0px, 5vw, 30px)', fontSize: 'clamp(13px, 3.5vw, 14px)', fontStyle: 'italic', color: 'var(--dark)', wordBreak: 'break-word' }}>
                                     {comentarios}
                                 </p>
                             </div>
@@ -266,10 +292,10 @@ Quedo atento a su confirmación. ¡Gracias!`
                     color: 'var(--gray)', 
                     marginBottom: '25px', 
                     lineHeight: '1.6',
-                    fontSize: '15px',
+                    fontSize: 'clamp(13px, 3.5vw, 15px)',
                     textAlign: 'left',
                     background: '#F8FAFC',
-                    padding: '15px',
+                    padding: 'clamp(12px, 4vw, 15px)',
                     borderRadius: '8px'
                 }}>
                     Hemos recibido tu solicitud correctamente. Para agilizar el proceso, 
@@ -284,8 +310,8 @@ Quedo atento a su confirmación. ¡Gracias!`
                     style={{
                         background: '#25D366',
                         border: 'none',
-                        padding: '16px 30px',
-                        fontSize: '18px',
+                        padding: 'clamp(12px, 4vw, 16px) clamp(20px, 5vw, 30px)',
+                        fontSize: 'clamp(14px, 4vw, 18px)',
                         marginBottom: '20px',
                         width: '100%',
                         transition: 'all 0.3s ease',
@@ -295,19 +321,19 @@ Quedo atento a su confirmación. ¡Gracias!`
                         gap: '12px'
                     }}
                     onMouseEnter={(e) => {
-                        e.target.style.transform = 'scale(1.02)'
-                        e.target.style.boxShadow = '0 10px 20px rgba(37, 211, 102, 0.3)'
+                        e.currentTarget.style.transform = 'scale(1.02)'
+                        e.currentTarget.style.boxShadow = '0 10px 20px rgba(37, 211, 102, 0.3)'
                     }}
                     onMouseLeave={(e) => {
-                        e.target.style.transform = 'scale(1)'
-                        e.target.style.boxShadow = 'none'
+                        e.currentTarget.style.transform = 'scale(1)'
+                        e.currentTarget.style.boxShadow = 'none'
                     }}
                 >
                     <IconWhatsApp />
                     Contactar por WhatsApp
                 </button>
 
-                <p style={{ fontSize: '13px', color: 'var(--gray)', marginBottom: '20px', textAlign: 'center' }}>
+                <p style={{ fontSize: 'clamp(11px, 3vw, 13px)', color: 'var(--gray)', marginBottom: '20px', textAlign: 'center' }}>
                     Una vez coordinada la sesión, te enviaremos el link de la reunión (Zoom/Meet).
                 </p>
 
@@ -321,8 +347,10 @@ Quedo atento a su confirmación. ¡Gracias!`
                         margin: '10px auto 0',
                         display: 'inline-flex',
                         alignItems: 'center',
+                        justifyContent: 'center',
                         gap: '8px',
-                        padding: '10px 20px'
+                        padding: 'clamp(8px, 3vw, 10px) clamp(16px, 4vw, 20px)',
+                        width: 'auto'
                     }}
                 >
                     <IconArrowLeft />
@@ -338,6 +366,21 @@ Quedo atento a su confirmación. ¡Gracias!`
                 @keyframes scaleIn {
                     from { transform: scale(0); }
                     to { transform: scale(1); }
+                }
+                
+                /* Responsive adicional */
+                @media (max-width: 480px) {
+                    .card {
+                        padding: 16px !important;
+                    }
+                    
+                    p, .form-label, span, strong {
+                        font-size: 12px !important;
+                    }
+                    
+                    h4 {
+                        font-size: 14px !important;
+                    }
                 }
             `}</style>
         </div>
