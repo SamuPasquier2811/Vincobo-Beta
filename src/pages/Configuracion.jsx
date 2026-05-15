@@ -436,6 +436,14 @@ export default function Configuracion() {
                           flexWrap: 'wrap'
                         }}>
                           <button 
+                            onClick={handleCambiarPassword}
+                            className="btn btn-primary"
+                            disabled={cambiandoPasswordEstado || !nuevaPassword || !confirmarNuevaPassword}
+                            style={{ flex: 1, minWidth: '120px' }}
+                          >
+                            {cambiandoPasswordEstado ? 'Actualizando...' : 'Actualizar contraseña'}
+                          </button>
+                          <button 
                             onClick={() => {
                               setCambiandoPassword(false)
                               setNuevaPassword('')
@@ -445,14 +453,6 @@ export default function Configuracion() {
                             style={{ flex: 1, minWidth: '120px' }}
                           >
                             Cancelar
-                          </button>
-                          <button 
-                            onClick={handleCambiarPassword}
-                            className="btn btn-primary"
-                            disabled={cambiandoPasswordEstado || !nuevaPassword || !confirmarNuevaPassword}
-                            style={{ flex: 1, minWidth: '120px' }}
-                          >
-                            {cambiandoPasswordEstado ? 'Actualizando...' : 'Actualizar contraseña'}
                           </button>
                         </div>
                       </div>
