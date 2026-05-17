@@ -984,7 +984,7 @@ export default function Reserva() {
                       <IconCareer />
                       <span style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--primary)' }}>CARRERA</span>
                     </div>
-                    <p style={{ fontSize: '14px', color: 'var(--gray)' }}>Explicación completa: Introducción, malla curricular, proyectos reales y experiencias</p>
+                    <p style={{ fontSize: '14px', color: 'var(--gray)' }}>Explicación completa: Introducción, malla curricular, proyectos reales, experiencias y resolución de dudas</p>
                     <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px' }}>Reunión Virtual de 45-60 minutos • 60 Bs</p>
                   </button>
                   <button
@@ -1234,7 +1234,7 @@ export default function Reserva() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <IconNotes />
                       <div>
-                        <p style={{ fontWeight: 'bold' }}>¿Deseas adicionar Apuntes Digitales?</p>
+                        <p style={{ fontWeight: 'bold' }}>¿Deseas adicionar Apuntes Digitales? (CARRERA+)</p>
                         <p style={{ fontSize: '12px', color: 'var(--gray)' }}>Apuntes del mentor de materia representativa de la carrera para previsualización</p>
                       </div>
                     </div>
