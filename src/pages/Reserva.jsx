@@ -149,6 +149,7 @@ const ModalTerminos = ({ isOpen, onClose }) => {
             <li>No solicitar ni compartir datos personales con mentores (WhatsApp, redes sociales, etc.).</li>
             <li>Respetar las normas de conducta durante las sesiones.</li>
             <li>Proporcionar información veraz y no suplantar identidad de terceros.</li>
+            <li>Es requisito obligatorio que el usuario mantenga la cámara y el micrófono encendidos durante toda la sesión. El incumplimiento de esta condición facultará a VINCOBO o al mentor a suspender o no iniciar la sesión, considerándose como una falta atribuible al usuario, sin derecho a reembolso.</li>
           </ul>
 
           <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>8. OBLIGACIONES DE LOS MENTORES</h4>
@@ -351,6 +352,7 @@ const ModalPrivacidad = ({ isOpen, onClose }) => {
             <li>Todas las sesiones son grabadas por razones de seguridad y control de calidad.</li>
             <li>El usuario acepta expresamente esta condición.</li>
             <li>Estas grabaciones no serán divulgadas públicamente.</li>
+            <li>Las grabaciones estarán disponibles para los padres o tutores legales por un período estricto de 7 días calendario posteriores a la realización de la sesión. Transcurrido este plazo, los archivos serán eliminados permanentemente de los sistemas por razones de seguridad y almacenamiento.</li>
           </ul>
 
           <h4 style={{ fontSize: 'clamp(14px, 4vw, 16px)', marginTop: '16px', marginBottom: '8px' }}>8. CESIÓN DE DATOS</h4>
