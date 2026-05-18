@@ -421,6 +421,7 @@ export default function Admin() {
             { key: 'nombre_completo', label: 'Nombre Completo' },
             { key: 'email', label: 'Email' },
             { key: 'celular', label: 'Celular' },
+            { key: 'celular_menor', label: 'Celular del Menor' },
             { key: 'rol', label: 'Rol' },
             { key: 'tipo_usuario', label: 'Tipo de Usuario' },
             { key: 'nombre_menor', label: 'Nombre del Menor (si aplica)' },
@@ -521,15 +522,31 @@ export default function Admin() {
                             />
                         </div>
                         {usuario.tipo_usuario === 'tutor' && (
-                        <div className="form-group">
-                            <label className="form-label"><IconCalendar /> Fecha Nacimiento Menor</label>
-                            <input 
-                            type="date" 
-                            className="form-input" 
-                            value={formUsuario.fecha_nacimiento_menor !== undefined ? formUsuario.fecha_nacimiento_menor : usuario.fecha_nacimiento_menor || ''} 
-                            onChange={(e) => setFormUsuario({ ...formUsuario, fecha_nacimiento_menor: e.target.value })} 
-                            />
-                        </div>
+                            <>
+                                <div className="form-group">
+                                <label className="form-label"><IconChild /> Nombre del menor</label>
+                                <input type="text" className="form-input" value={formUsuario.nombre_menor !== undefined ? formUsuario.nombre_menor : usuario.nombre_menor || ''} onChange={(e) => setFormUsuario({ ...formUsuario, nombre_menor: e.target.value })} />
+                                </div>
+                                <div className="form-group"> 
+                                <label className="form-label"><IconPhone /> Celular del menor (opcional)</label>
+                                <input 
+                                    type="tel" 
+                                    className="form-input" 
+                                    value={formUsuario.celular_menor !== undefined ? formUsuario.celular_menor : usuario.celular_menor || ''} 
+                                    onChange={(e) => setFormUsuario({ ...formUsuario, celular_menor: e.target.value })} 
+                                    placeholder="Ej: 71234567"
+                                />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label"><IconCalendar /> Fecha Nacimiento Menor</label>
+                                    <input 
+                                    type="date" 
+                                    className="form-input" 
+                                    value={formUsuario.fecha_nacimiento_menor !== undefined ? formUsuario.fecha_nacimiento_menor : usuario.fecha_nacimiento_menor || ''} 
+                                    onChange={(e) => setFormUsuario({ ...formUsuario, fecha_nacimiento_menor: e.target.value })} 
+                                    />
+                                </div>
+                            </>
                         )}
                         {usuario.rol !== 'cliente' && (
                             <>
@@ -611,7 +628,10 @@ export default function Admin() {
                                 <p><IconUser /> <strong>Edad:</strong> {usuario.edad || 'No especificada'}</p>
                                 <p><IconCalendar /> <strong>Fecha Nac. Mayor:</strong> {usuario.fecha_nacimiento_mayor ? new Date(usuario.fecha_nacimiento_mayor).toLocaleDateString('es-ES') : 'No especificada'}</p>
                                 {usuario.tipo_usuario === 'tutor' && (
-                                    <p><IconCalendar /> <strong>Fecha Nac. Menor:</strong> {usuario.fecha_nacimiento_menor ? new Date(usuario.fecha_nacimiento_menor).toLocaleDateString('es-ES') : 'No especificada'}</p>
+                                    <>
+                                      <p><IconCalendar /> <strong>Fecha Nac. Menor:</strong> {usuario.fecha_nacimiento_menor ? new Date(usuario.fecha_nacimiento_menor).toLocaleDateString('es-ES') : 'No especificada'}</p>
+                                      <p><IconPhone /> <strong>Celular del menor:</strong> {usuario.celular_menor || 'No especificado'}</p> 
+                                    </>
                                 )}
                                 {usuario.tipo_usuario === 'tutor' && <p><IconChild /> <strong>Menor a cargo:</strong> {usuario.nombre_menor || 'No especificado'}</p>}
                                 <p><IconCheck /> <strong>Documentos verificados:</strong> {usuario.documentos_verificados ? 'Sí' : 'No'}</p>
