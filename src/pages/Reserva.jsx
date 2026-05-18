@@ -1043,16 +1043,27 @@ export default function Reserva() {
                     value={fecha} 
                     onChange={(e) => setFecha(e.target.value)} 
                     min={(() => {
-                      const fechaMin = new Date()
-                      fechaMin.setDate(fechaMin.getDate() + 2)
-                      return fechaMin.toISOString().split('T')[0]
+                      const hoy = new Date()
+                      // Obtener fecha local en UTC sin desplazamiento
+                      const year = hoy.getFullYear()
+                      const month = String(hoy.getMonth() + 1).padStart(2, '0')
+                      const day = String(hoy.getDate()).padStart(2, '0')
+                      const hoyLocal = `${year}-${month}-${day}`
+                      
+                      // Sumar 2 días
+                      const fechaMin = new Date(year, hoy.getMonth(), hoy.getDate() + 2)
+                      const yearMin = fechaMin.getFullYear()
+                      const monthMin = String(fechaMin.getMonth() + 1).padStart(2, '0')
+                      const dayMin = String(fechaMin.getDate()).padStart(2, '0')
+                      
+                      return `${yearMin}-${monthMin}-${dayMin}`
                     })()} 
                     onKeyDown={(e) => e.preventDefault()}
                   />
                   <p style={{ fontSize: '12px', color: 'var(--gray)', marginTop: '4px' }}>
-                      Las reservas requieren 2 días de anticipación. La fecha más cercana disponible es {(() => {
-                      const fechaMin = new Date()
-                      fechaMin.setDate(fechaMin.getDate() + 2)
+                    Las reservas requieren 2 días de anticipación. La fecha más cercana disponible es {(() => {
+                      const hoy = new Date()
+                      const fechaMin = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 2)
                       return fechaMin.toLocaleDateString()
                     })()}.
                   </p>
