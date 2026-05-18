@@ -11,6 +11,7 @@ export default function Register() {
     nombre_completo: '',
     celular: '',
     nombre_menor: '',
+    celular_menor: '',
     fecha_nacimiento: '',
     fecha_nacimiento_menor: ''
   })
@@ -58,6 +59,11 @@ export default function Register() {
         break
       case 'celular':
         if (!/^[0-9]{7,8}$/.test(valor)) {
+          error = 'Ingresa un celular válido (7-8 dígitos)'
+        }
+        break
+      case 'celular_menor':
+        if (valor && !/^[0-9]{7,8}$/.test(valor)) {
           error = 'Ingresa un celular válido (7-8 dígitos)'
         }
         break
@@ -191,6 +197,7 @@ export default function Register() {
               celular: formData.celular,
               tipo_usuario: tipo,
               nombre_menor: tipo === 'tutor' ? formatearNombre(formData.nombre_menor) : null,
+              celular_menor: tipo === 'tutor' ? formData.celular_menor : null,
               rol: 'usuario',
               edad: edad,
               fecha_nacimiento_mayor: formData.fecha_nacimiento,
@@ -428,6 +435,28 @@ export default function Register() {
                   />
                   {errores.fecha_nacimiento_menor && (
                     <p className="error-message">{errores.fecha_nacimiento_menor}</p>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label className="form-label">
+                    Celular del menor (opcional)
+                    <span style={{ fontSize: '12px', color: 'var(--gray)', marginLeft: '8px' }}>
+                      - Para también enviarle el link de la reunión directamente
+                    </span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="celular_menor"
+                    className="form-input"
+                    value={formData.celular_menor}
+                    onChange={handleChange}
+                    placeholder="Ej: 71234567"
+                    style={{
+                      borderColor: errores.celular_menor ? 'var(--error)' : '#E2E8F0'
+                    }}
+                  />
+                  {errores.celular_menor && (
+                    <p className="error-message">{errores.celular_menor}</p>
                   )}
                 </div>
               </>
