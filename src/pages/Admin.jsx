@@ -44,6 +44,24 @@ const formatearFechaHoraBolivia = (fecha) => {
     })
 }
 
+// Función para formatear fechas sin problema de zona horaria
+const formatearFechaLocal = (fechaISO) => {
+    if (!fechaISO) return 'No especificada'
+    // Si la fecha viene en formato ISO (YYYY-MM-DD)
+    if (typeof fechaISO === 'string' && fechaISO.includes('-')) {
+        const [year, month, day] = fechaISO.split('-')
+        return `${day}/${month}/${year}`
+    }
+    // Si ya es un objeto Date o formato diferente
+    try {
+        const fecha = new Date(fechaISO)
+        if (!isNaN(fecha.getTime())) {
+        return fecha.toLocaleDateString('es-ES')
+        }
+    } catch(e) {}
+    return fechaISO
+}
+
 const sanitizarNombre = (nombre) => {
     return nombre
         .toLowerCase()
@@ -74,6 +92,7 @@ export default function Admin() {
     // Estados para búsqueda
     const [busquedaClientes, setBusquedaClientes] = useState('')
     const [busquedaStaff, setBusquedaStaff] = useState('')
+    const [filtroCarreraStaff, setFiltroCarreraStaff] = useState('') 
     
     // Estados para edición
     const [editandoUsuario, setEditandoUsuario] = useState(null)
@@ -200,6 +219,18 @@ export default function Admin() {
         }
     }
 
+    // Guardar posición del scroll antes de una acción
+    const guardarScrollY = () => {
+      return window.scrollY
+    }
+    
+    // Restaurar posición del scroll
+    const restaurarScrollY = (posicion) => {
+      setTimeout(() => {
+        window.scrollTo(0, posicion)
+      }, 100)
+    }
+
     useEffect(() => {
         const verificarAdmin = async () => {
             const { data: { user } } = await supabase.auth.getUser()
@@ -275,6 +306,9 @@ export default function Admin() {
         }
     }
 
+    // Obtener carreras únicas para el filtro
+    const carrerasStaffUnicas = [...new Set(staff.map(s => s.carrera).filter(c => c && c !== ''))]
+
     const actualizarReserva = async (id) => {
         const { error } = await supabase.from('reservas').update(formReserva).eq('id', id)
         if (!error) {
@@ -288,6 +322,7 @@ export default function Admin() {
     }
 
     const actualizarUsuario = async (id, listaUsuarios, setListaUsuarios) => {
+        const scrollPos = guardarScrollY()
         const usuarioOriginal = listaUsuarios.find(u => u.id === id)
         const nombreOriginal = usuarioOriginal?.nombre_completo
         const nombreNuevo = formUsuario.nombre_completo
@@ -316,6 +351,7 @@ export default function Admin() {
             setEditandoUsuario(null)
             setFormUsuario({})
             mostrarNotificacion('Usuario actualizado correctamente', 'success')
+            restaurarScrollY(scrollPos) 
         } else {
             mostrarNotificacion('Error al actualizar usuario: ' + error.message, 'error')
         }
@@ -626,12 +662,12 @@ export default function Admin() {
                                 <p><IconMail /> <strong>Email:</strong> {usuario.email || 'No especificado'}</p>
                                 <p><IconPhone /> <strong>Celular:</strong> {usuario.celular || 'No especificado'}</p>
                                 <p><IconUser /> <strong>Edad:</strong> {usuario.edad || 'No especificada'}</p>
-                                <p><IconCalendar /> <strong>Fecha Nac. Mayor:</strong> {usuario.fecha_nacimiento_mayor ? new Date(usuario.fecha_nacimiento_mayor).toLocaleDateString('es-ES') : 'No especificada'}</p>
+                                <p><IconCalendar /> <strong>Fecha Nac. Mayor:</strong> {formatearFechaLocal(usuario.fecha_nacimiento_mayor)}</p>
                                 {usuario.tipo_usuario === 'tutor' && (
-                                    <>
-                                      <p><IconCalendar /> <strong>Fecha Nac. Menor:</strong> {usuario.fecha_nacimiento_menor ? new Date(usuario.fecha_nacimiento_menor).toLocaleDateString('es-ES') : 'No especificada'}</p>
-                                      <p><IconPhone /> <strong>Celular del menor:</strong> {usuario.celular_menor || 'No especificado'}</p> 
-                                    </>
+                                  <>
+                                    <p><IconCalendar /> <strong>Fecha Nac. Menor:</strong> {formatearFechaLocal(usuario.fecha_nacimiento_menor)}</p>
+                                    <p><IconPhone /> <strong>Celular del menor:</strong> {usuario.celular_menor || 'No especificado'}</p> 
+                                  </>
                                 )}
                                 {usuario.tipo_usuario === 'tutor' && <p><IconChild /> <strong>Menor a cargo:</strong> {usuario.nombre_menor || 'No especificado'}</p>}
                                 <p><IconCheck /> <strong>Documentos verificados:</strong> {usuario.documentos_verificados ? 'Sí' : 'No'}</p>
@@ -678,8 +714,17 @@ export default function Admin() {
 
                         <p style={{ fontSize: '12px', color: 'var(--gray)', marginTop: '15px' }}>Registrado: {formatearFechaHoraBolivia(usuario.created_at)}</p>
 
-                        <button onClick={() => { setEditandoUsuario(usuario.id); setFormUsuario({}); }} className="btn btn-primary" style={{ marginTop: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <IconEdit /> Editar
+                        <button 
+                          onClick={() => { 
+                            const scrollPos = guardarScrollY()
+                            setEditandoUsuario(usuario.id); 
+                            setFormUsuario({});
+                            restaurarScrollY(scrollPos) 
+                          }} 
+                          className="btn btn-primary" 
+                          style={{ marginTop: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}
+                        >
+                          <IconEdit /> Editar
                         </button>
                     </div>
                 )}
@@ -864,7 +909,7 @@ export default function Admin() {
                                                 <p><IconMail /> <strong>Email:</strong> {reserva.email_reservante || 'No especificado'}</p>
                                                 <p><IconPhone /> <strong>Celular:</strong> {reserva.celular_reservante || 'No especificado'}</p>
                                                 <p><IconBook /> <strong>Carrera:</strong> {reserva.carrera || 'No especificada'}</p>
-                                                <p><IconCalendar /> <strong>Fecha:</strong> {reserva.fecha_sugerida ? new Date(reserva.fecha_sugerida).toLocaleDateString() : 'No especificada'}</p>
+                                                <p><IconCalendar /> <strong>Fecha:</strong> {formatearFechaLocal(reserva.fecha_sugerida)}</p>
                                                 <p><IconClock /> <strong>Turno:</strong> {reserva.turno === 'mañana' ? 'Mañana' : reserva.turno === 'tarde' ? 'Tarde' : 'Noche'}</p>
                                                 <p><IconUniversity /> <strong>Universidad:</strong> {reserva.universidad_preferida || 'Sin preferencia'}</p>
                                                 <p><IconBook /> <strong>Semestre preferido:</strong> {reserva.semestre_preferido || 'Sin preferencia'}</p>
@@ -927,10 +972,25 @@ export default function Admin() {
                             <IconUsuarios /> Gestión de Staff
                         </h2>
                         
-                        <div style={{ marginBottom: '25px' }}>
+                        <div style={{ marginBottom: '25px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                            {/* Buscador por nombre/email */}
                             <div style={{ position: 'relative', maxWidth: '400px' }}>
                                 <input type="text" placeholder="Buscar por nombre o email..." value={busquedaStaff} onChange={(e) => setBusquedaStaff(e.target.value)} style={{ width: '100%', padding: '12px 20px 12px 45px', border: '1px solid #E2E8F0', borderRadius: '8px', fontSize: '14px' }} />
                                 <div style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--gray)' }}><IconSearch /></div>
+                            </div>
+                            
+                            {/* Filtro por carrera */}
+                            <div style={{ position: 'relative', maxWidth: '400px' }}>
+                                <select 
+                                    value={filtroCarreraStaff} 
+                                    onChange={(e) => setFiltroCarreraStaff(e.target.value)}
+                                    style={{ width: '100%', padding: '12px 15px', border: '1px solid #E2E8F0', borderRadius: '8px', fontSize: '14px', backgroundColor: 'white' }}
+                                >
+                                    <option value="">Todas las carreras</option>
+                                    {carrerasStaffUnicas.map(carrera => (
+                                        <option key={carrera} value={carrera}>{carrera}</option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
 
@@ -942,7 +1002,8 @@ export default function Admin() {
                                     const textoCoincide = (u.nombre_completo?.toLowerCase() || '').includes(busquedaStaff.toLowerCase()) ||
                                         (u.email?.toLowerCase() || '').includes(busquedaStaff.toLowerCase())
                                     const rolCoincide = filtroRolStaff === 'todos' || u.rol === filtroRolStaff
-                                    return textoCoincide && rolCoincide
+                                    const carreraCoincide = !filtroCarreraStaff || u.carrera === filtroCarreraStaff 
+                                    return textoCoincide && rolCoincide && carreraCoincide
                                 }).length === 0 ? (
                                     <div className="card" style={{ textAlign: 'center', padding: '40px' }}><p style={{ color: 'var(--gray)' }}>No se encontraron miembros del staff</p></div>
                                 ) : (
@@ -950,7 +1011,8 @@ export default function Admin() {
                                         const textoCoincide = (u.nombre_completo?.toLowerCase() || '').includes(busquedaStaff.toLowerCase()) ||
                                             (u.email?.toLowerCase() || '').includes(busquedaStaff.toLowerCase())
                                         const rolCoincide = filtroRolStaff === 'todos' || u.rol === filtroRolStaff
-                                        return textoCoincide && rolCoincide
+                                        const carreraCoincide = !filtroCarreraStaff || u.carrera === filtroCarreraStaff
+                                        return textoCoincide && rolCoincide && carreraCoincide
                                     }).map(usuario => (
                                         <UserCard key={usuario.id} usuario={usuario} listaType="staff" setLista={setStaff} />
                                     ))
