@@ -9,13 +9,14 @@ export default function ResetPassword() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [mostrarPassword, setMostrarPassword] = useState(false)
+  const [mostrarConfirmPassword, setMostrarConfirmPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [errores, setErrores] = useState({})
   const [notificacion, setNotificacion] = useState({ mostrar: false, mensaje: '', tipo: '' })
   const [validToken, setValidToken] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Verificar si el usuario viene de un enlace válido de recuperación
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) {
@@ -25,6 +26,46 @@ export default function ResetPassword() {
     }
     checkSession()
   }, [])
+
+  const validarPassword = (valor) => {
+    if (!valor) {
+      return 'La contraseña es requerida'
+    }
+    if (valor.length < 6) {
+      return 'La contraseña debe tener al menos 6 caracteres'
+    }
+    return ''
+  }
+
+  const validarConfirmPassword = (valor) => {
+    if (!valor) {
+      return 'Confirma tu contraseña'
+    }
+    if (valor !== password) {
+      return 'Las contraseñas no coinciden'
+    }
+    return ''
+  }
+
+  const handlePasswordChange = (e) => {
+    const valor = e.target.value
+    setPassword(valor)
+    const error = validarPassword(valor)
+    setErrores(prev => ({ ...prev, password: error }))
+    
+    // Validar confirmación si ya tiene valor
+    if (confirmPassword) {
+      const confirmError = validarConfirmPassword(confirmPassword)
+      setErrores(prev => ({ ...prev, confirmPassword: confirmError }))
+    }
+  }
+
+  const handleConfirmPasswordChange = (e) => {
+    const valor = e.target.value
+    setConfirmPassword(valor)
+    const error = validarConfirmPassword(valor)
+    setErrores(prev => ({ ...prev, confirmPassword: error }))
+  }
 
   const mostrarNotificacion = (mensaje, tipo = 'error') => {
     setNotificacion({ mostrar: true, mensaje, tipo })
@@ -36,13 +77,16 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (password.length < 6) {
-      mostrarNotificacion('La contraseña debe tener al menos 6 caracteres')
-      return
-    }
+    const errorPassword = validarPassword(password)
+    const errorConfirm = validarConfirmPassword(confirmPassword)
 
-    if (password !== confirmPassword) {
-      mostrarNotificacion('Las contraseñas no coinciden')
+    setErrores({
+      password: errorPassword,
+      confirmPassword: errorConfirm
+    })
+
+    if (errorPassword || errorConfirm) {
+      mostrarNotificacion('Por favor, corrige los errores del formulario')
       return
     }
 
@@ -135,7 +179,7 @@ export default function ResetPassword() {
             Restablecer contraseña
           </h2>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div className="form-group">
               <label className="form-label">Nueva contraseña</label>
               <div style={{ position: 'relative' }}>
@@ -143,9 +187,12 @@ export default function ResetPassword() {
                   type={mostrarPassword ? 'text' : 'password'}
                   className="form-input"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handlePasswordChange}
                   placeholder="Mínimo 6 caracteres"
-                  required
+                  style={{
+                    borderColor: errores.password ? 'var(--error)' : '#E2E8F0',
+                    paddingRight: '40px'
+                  }}
                 />
                 <button
                   type="button"
@@ -157,24 +204,58 @@ export default function ResetPassword() {
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    color: 'var(--gray)'
                   }}
                 >
                   {mostrarPassword ? <IconEye /> : <IconEyeOff />}
                 </button>
               </div>
+              {errores.password && (
+                <p style={{ color: 'var(--error)', fontSize: '12px', marginTop: '4px' }}>
+                  {errores.password}
+                </p>
+              )}
             </div>
 
             <div className="form-group">
               <label className="form-label">Confirmar contraseña</label>
-              <input
-                type="password"
-                className="form-input"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Repite tu nueva contraseña"
-                required
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  type={mostrarConfirmPassword ? 'text' : 'password'}
+                  className="form-input"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  placeholder="Repite tu nueva contraseña"
+                  style={{
+                    borderColor: errores.confirmPassword ? 'var(--error)' : '#E2E8F0',
+                    paddingRight: '40px'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setMostrarConfirmPassword(!mostrarConfirmPassword)}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    color: 'var(--gray)'
+                  }}
+                >
+                  {mostrarConfirmPassword ? <IconEye /> : <IconEyeOff />}
+                </button>
+              </div>
+              {errores.confirmPassword && (
+                <p style={{ color: 'var(--error)', fontSize: '12px', marginTop: '4px' }}>
+                  {errores.confirmPassword}
+                </p>
+              )}
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
