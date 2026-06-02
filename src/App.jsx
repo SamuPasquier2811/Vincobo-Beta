@@ -9,6 +9,7 @@ import Admin from './pages/Admin'
 import RegistroMentor from './pages/RegistroMentor'
 import Dashboard from './pages/Dashboard'
 import Configuracion from './pages/Configuracion'
+import ResetPassword from './pages/ResetPassword'
 function App() {
     return (
         <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/registro-mentor" element={<RegistroMentor/>} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/configuracion" element={<Configuracion />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
             </Routes>
         </BrowserRouter>
     )
