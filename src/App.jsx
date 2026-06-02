@@ -24,7 +24,7 @@ function App() {
                 <Route path="/registro-mentor" element={<RegistroMentor/>} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/configuracion" element={<Configuracion />} />
-                <Route path="/reset-password" element={<ResetPassword />} /> 
+                <Route path="/reset-password" element={<ResetPassword />} />
             </Routes>
         </BrowserRouter>
     )
