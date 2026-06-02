@@ -9,6 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [mostrarPassword, setMostrarPassword] = useState(false)
+  const [mostrarPasswordConfirm, setMostrarPasswordConfirm] = useState(false)
   const [loading, setLoading] = useState(false)
   const [recuperando, setRecuperando] = useState(false)
   const [emailRecuperacion, setEmailRecuperacion] = useState('')
@@ -18,13 +19,19 @@ export default function Login() {
   const navigate = useNavigate()
 
   const validarEmail = (valor) => {
+    if (!valor) {
+      return 'El email es requerido'
+    }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
-      return 'Ingresa un email válido'
+      return 'Ingresa un email válido (ejemplo@correo.com)'
     }
     return ''
   }
 
   const validarPassword = (valor) => {
+    if (!valor) {
+      return 'La contraseña es requerida'
+    }
     if (valor.length < 6) {
       return 'La contraseña debe tener al menos 6 caracteres'
     }
@@ -57,7 +64,7 @@ export default function Login() {
     
     const errorEmail = validarEmail(emailRecuperacion)
     if (errorEmail) {
-      mostrarNotificacion('Ingresa un email válido')
+      mostrarNotificacion(errorEmail)
       return
     }
 
@@ -72,7 +79,6 @@ export default function Login() {
     } else {
       mostrarNotificacion('Te enviamos un enlace a tu correo para restablecer tu contraseña', 'success')
       setEmailRecuperacion('')
-      // Opcional: volver al login después de 3 segundos
       setTimeout(() => {
         setRecuperando(false)
       }, 3000)
@@ -92,7 +98,7 @@ export default function Login() {
     })
 
     if (errorEmail || errorPassword) {
-      mostrarNotificacion('Por favor, corrige los errores')
+      mostrarNotificacion('Por favor, corrige los errores del formulario')
       return
     }
 
@@ -247,7 +253,6 @@ export default function Login() {
                 {loading ? 'Iniciando...' : 'Iniciar Sesión'}
               </button>
 
-              {/* ¿Olvidaste tu contraseña? debajo del botón */}
               <div style={{ textAlign: 'center' }}>
                 <button
                   type="button"
@@ -265,7 +270,7 @@ export default function Login() {
               </div>
             </form>
           ) : (
-            <form onSubmit={handleRecuperarPassword}>
+            <form onSubmit={handleRecuperarPassword} noValidate>
               <div className="form-group">
                 <label className="form-label">Email registrado</label>
                 <input
@@ -274,7 +279,6 @@ export default function Login() {
                   value={emailRecuperacion}
                   onChange={(e) => setEmailRecuperacion(e.target.value)}
                   placeholder="ejemplo@correo.com"
-                  required
                 />
                 <p style={{ fontSize: '12px', color: 'var(--gray)', marginTop: '8px' }}>
                   Te enviaremos un enlace para restablecer tu contraseña.
